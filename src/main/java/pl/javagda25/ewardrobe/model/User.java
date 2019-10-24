@@ -17,7 +17,6 @@ public class User {
 
     private String login;
 
-    @OneToMany(mappedBy = "clothId", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @Cascade(value = org.hibernate.annotations.CascadeType.REMOVE)
+    @OneToMany(mappedBy = "clothId", fetch = FetchType.EAGER)
     private List<Cloth> clothListUser;
 }

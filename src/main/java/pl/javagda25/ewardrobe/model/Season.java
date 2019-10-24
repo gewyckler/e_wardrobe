@@ -1,6 +1,7 @@
 package pl.javagda25.ewardrobe.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Formula;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Season {
@@ -19,13 +21,10 @@ public class Season {
 
     @Enumerated
     private SeasonName seasonName;
-    private LocalDate startDate;
-    private LocalDate endDate;
-//    @Formula("(SELECT exists (SELECT * FROM Season WHERE now() BETWEEN startDate AND endDate) as date_result)")
-//    @Formula("(Select 1 FROM Season WHERE GETDATE() between startDate AND endDate)")
-//    private Boolean inSeason;
 
-    @OneToMany(mappedBy = "clothId", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @Cascade(value = org.hibernate.annotations.CascadeType.REMOVE)
+    @Formula("(SELECT exists (SELECT * FROM season WHERE dayofyear() BETWEEN season_name.getStartDay() AND season_name.getEndDay()))")
+    private Boolean inSeason;
+
+    @OneToMany(mappedBy = "clothId", fetch = FetchType.EAGER)
     private List<Cloth> clothListSeason;
 }

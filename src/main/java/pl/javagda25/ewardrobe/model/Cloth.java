@@ -20,7 +20,9 @@ public class Cloth {
 
     private Brand brand;
 
-    private String photo;
+    @Lob
+    @Column(columnDefinition = "BLOB")
+    private Byte[] photo;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -36,4 +38,5 @@ public class Cloth {
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     private Season season;
+
 }
