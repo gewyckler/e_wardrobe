@@ -11,6 +11,7 @@ public class Season {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long seasonId;
 
+    @Enumerated
     private SeasonName seasonName;
     private LocalDate startDate;
     private LocalDate endDate;

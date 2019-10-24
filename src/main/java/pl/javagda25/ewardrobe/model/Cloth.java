@@ -10,6 +10,7 @@ public class Cloth {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long clothId;
 
+    @Enumerated
     private ClothType clothType;
 
     private Brand brand;
