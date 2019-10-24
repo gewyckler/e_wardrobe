@@ -12,7 +12,7 @@ public class User {
 
     private String login;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @Cascade(value = org.hibernate.annotations.CascadeType.DELETE)
-    private List<Cloth> clothList;
+    @OneToMany(mappedBy = "clothId", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @Cascade(value = org.hibernate.annotations.CascadeType.REMOVE)
+    private List<Cloth> clothListUser;
 }

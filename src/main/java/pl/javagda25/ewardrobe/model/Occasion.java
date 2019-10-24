@@ -1,8 +1,7 @@
 package pl.javagda25.ewardrobe.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 public class Occasion {
     @Id
@@ -10,4 +9,7 @@ public class Occasion {
     private Long id;
 
     private String name;
+
+    @OneToMany(mappedBy = "occasion", fetch = FetchType.EAGER)
+    private List<Cloth> clothListOccasion;
 }
