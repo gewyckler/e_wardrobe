@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -31,8 +32,8 @@ public class Cloth {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Occasion occasion;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Occasion> occasion;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

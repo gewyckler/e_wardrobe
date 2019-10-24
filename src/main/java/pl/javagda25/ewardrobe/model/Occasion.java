@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -12,10 +12,11 @@ import java.util.List;
 public class Occasion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long occasionId;
 
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private OccasionName occasionName;
 
-    @OneToMany(mappedBy = "occasion", fetch = FetchType.EAGER)
-    private List<Cloth> clothListOccasion;
+    @ManyToMany(mappedBy = "occasion", fetch = FetchType.EAGER)
+    private Set<Cloth> clothListOccasion;
 }
