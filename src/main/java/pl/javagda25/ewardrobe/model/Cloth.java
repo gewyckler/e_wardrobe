@@ -1,10 +1,15 @@
 package pl.javagda25.ewardrobe.model;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
 
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Cloth {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,7 +19,6 @@ public class Cloth {
     private ClothType clothType;
 
     private Brand brand;
-
 
     private String photo;
 
