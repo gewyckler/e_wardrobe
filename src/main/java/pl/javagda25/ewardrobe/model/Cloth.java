@@ -1,14 +1,12 @@
 package pl.javagda25.ewardrobe.model;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cloth {
@@ -19,6 +17,7 @@ public class Cloth {
     @Enumerated
     private ClothType clothType;
 
+    @Enumerated(value = EnumType.STRING)
     private Brand brand;
 
     @Lob

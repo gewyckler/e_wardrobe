@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fragments</title>
+    <th:block th:fragment="headerlinks">
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}">
+        <link rel="stylesheet" th:href="@{/style.css}">
+    </th:block>
+</head>
+
+<body>
+<th:block th:fragment="navigator">
+    <header>
+
+        <div class="logo col-md-12">LOGO STRONY</div>
+        <div class="container sidenav">
+            <nav class="row col-md-12 align-items-center">
+                <button type="button" class="offset-md-3 col-2 btn btn-dark">Add cloth</button>
+                <button type="button" class="col-2 btn btn-dark">Show all</button>
+                <button type="button" class="col-2 btn btn-dark">Sort</button>
+            </nav>
+        </div>
+    </header>
+</th:block>
+
+<th:block th:fragment="footerscripts">
+
+</th:block>
+<footer th:fragment="footer">
+    <footer class="container">
+        <p><a class="align-right" th:href="@{/index}">Back to top</a></p>
+    </footer>
+</footer>
+</body>
+</html>

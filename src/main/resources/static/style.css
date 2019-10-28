@@ -1,0 +1,39 @@
+/*MOJE*/
+
+.logo {
+    font-size: 30px;
+    text-align: center;
+    font-family: "Times New Roman";
+    font-style: normal;
+}
+
+.list-container {
+    margin-top: 10px;
+    border: solid 1px #5a5a5a;
+}
+
+.form-container {
+    border: solid 1px #c3c3c3;
+    align-content: center;
+    margin:0px;
+    background-color: azure;
+    padding:0px;
+}
+
+.form-row-container {
+    /*background-color: azure;*/
+    /*padding: 10px;*/
+}
+
+.sidenav {
+    border-bottom: solid #5a5a5a;
+    padding: 10px;
+    z-index: 1;
+    position: relative;
+}
+
+.divider{
+    width:5px;
+    height:auto;
+    display:inline-block;
+}

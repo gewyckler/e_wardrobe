@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+    <div th:replace="fragments :: headerlinks" th:remove="tag"></div>
+</head>
+<body>
+<header th:replace="fragments :: navigator"></header>
+
+<main role="main" class="main">
+    <div class="container">
+        <div class="row col=md-12 ">
+            <div class="col-md-12">
+                <h1>Add Cloth</h1>
+            </div>
+            <div class="col-md-12">
+                <form th:action="@{/cloth/add}" method="post" th:object="${cloth}" class="col-md-12 form-container">
+                    <div class="row col-md-12 form-row-container">
+                        <div class="col-md-6">
+                            <label for="clothType">Cloth Type:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-control" name="clothType" id="clothType" th:field="*{clothType}">
+                                <option th:each="clType: ${clothTypes}" th:text="${clType}" th:value="${clType}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row col-md-12 form-row-container">
+                        <div class="col-md-6">
+                            <label for="brand">Brand:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-control" name="brand" id="brand" th:field="*{brand}">
+                                <option th:each="brnd : ${brands}" th:text="${brnd.name()}" th:value="${brnd}"></option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="row col-md-12 form-row-container">
+                        <div class="col-md-6">
+                            <label for="photo">Photo:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <!--<select class="form-control" name="photo" id="photo" th:field="*{photo}">-->
+                                <!--<option th:each="brnd : ${brands}" th:text="${brnd.name()}" th:value="${brnd}"></option>-->
+                            <!--</select>-->
+                            <input type="image" src id="photo" th:field="*{photo}" th:value="*{photo}"
+                            class="col-md-12">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+    <footer th:replace="fragments:: footer"></footer>
+</main>
+
+<div th:replace="fragments::footerscripts"></div>
+</body>
+</html>

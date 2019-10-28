@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Start Page</title>
+    <div th:replace="fragments :: headerlinks" th:remove="tag"></div>
+</head>
+<body>
+
+<main role="main" class="main">
+    <header th:replace="fragments :: navigator"></header>
+
+
+    <footer th:replace="fragments:: footer"></footer>
+</main>
+
+<div th:replace="fragments::footerscripts"></div>
+</body>
+</html>
