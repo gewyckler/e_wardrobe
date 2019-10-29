@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum SeasonName {
-    ALLYEAR(1, 365),
+    ALL_YEAR(1, 365),
     SPRING(80, 171),
     SUMMER(172, 263),
     AUTUMN(264, 361),

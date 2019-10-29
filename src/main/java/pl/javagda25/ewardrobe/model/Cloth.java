@@ -3,6 +3,7 @@ package pl.javagda25.ewardrobe.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,8 +22,8 @@ public class Cloth {
     private Brand brand;
 
     @Lob
-    @Column(columnDefinition = "BLOB")
-    private Byte[] photo;
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] photo;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -32,11 +33,10 @@ public class Cloth {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Occasion> occasion;
+    private Set<Occasion> occasion = new HashSet<>();
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     private Season season;
-
 }

@@ -16,9 +16,17 @@
         <div class="logo col-md-12">LOGO STRONY</div>
         <div class="container sidenav">
             <nav class="row col-md-12 align-items-center">
-                <button type="button" class="offset-md-3 col-2 btn btn-dark">Add cloth</button>
-                <button type="button" class="col-2 btn btn-dark">Show all</button>
-                <button type="button" class="col-2 btn btn-dark">Sort</button>
+                <a th:href="@{/cloth/add}" class="col-md-4">
+                    <button type="submit" class="col-md-12 btn btn-dark">Add cloth</button>
+                </a>
+
+                <a th:href="@{/cloth/list}" class="col-md-4">
+                    <button type="submit" class="col-md-12 btn btn-dark">Show all</button>
+                </a>
+
+                <a th:href="@{/cloth/add}" class="col-md-4">
+                    <button type="submit" class="col-md-12 btn btn-dark">Sort</button>
+                </a>
             </nav>
         </div>
     </header>
@@ -29,7 +37,7 @@
 </th:block>
 <footer th:fragment="footer">
     <footer class="container">
-        <p><a class="align-right" th:href="@{/index}">Back to top</a></p>
+        <p><a class="align-right" th:href="@{/}">Back to top</a></p>
     </footer>
 </footer>
 </body>
