@@ -13,10 +13,6 @@ import pl.javagda25.ewardrobe.service.OccasionService;
 import pl.javagda25.ewardrobe.service.SeasonService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,13 +58,14 @@ public class ClothController {
             model.addAttribute("clothToEdit", optionalCloth.get());
             return "cloth-add";
         }
-        return "redirect:" + request.getHeader("referef");
+        return "redirect:" + request.getHeader("referer");
     }
 
     @GetMapping("/delete/{clothId}")
     public String delete(HttpServletRequest request,
                          @PathVariable(name = "clothId") Long clothId) {
         clothService.deleteById(clothId);
-        return "redirect: " + request.getHeader("referef");
+        return "redirect:/cloth/list";
     }
+
 }

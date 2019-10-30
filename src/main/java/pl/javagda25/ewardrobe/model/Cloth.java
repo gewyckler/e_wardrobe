@@ -3,6 +3,7 @@ package pl.javagda25.ewardrobe.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,4 +40,11 @@ public class Cloth {
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     private Season season;
+
+    public String convertBinImageToString() {
+        if (photo != null && photo.length > 0) {
+            return Base64.getEncoder().encodeToString(photo);
+        }
+        return "";
+    }
 }

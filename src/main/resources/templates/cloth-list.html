@@ -5,27 +5,45 @@
     <title>List</title>
     <div th:replace="fragments :: headerlinks" th:remove="tag"></div>
 </head>
-<body>
+<body class="body">
 <header th:replace="fragments :: navigator"></header>
 <main role="main" class="main">
     <div class="container">
-        <div class="row col-md-12">
-            <div class="col-md-4 cloth-module">
-                saads
-                <!--<div class="col-md-2" th:text="${cloth.getBrand()}">BRAND</div>-->
-                <!--<div class="col-md-2" th:text="${cloth.getClothType()}">CLOTH TYPE</div>-->
-                <!--<div class="col-md-2" th:text="${cloth.getOccasion()}">OCCASION</div>-->
-            </div>
+        <div class="row col-md-12 cloth-list offset-1">
+            <div class="col-md-5 cloth-module" th:each="cloth : ${clothList}">
+                <div class="cloth-brand col-md-12" th:text="${cloth.getBrand().name()}"></div>
 
-            <div class="col-md-4 cloth-module">
+                <div class="col-md-12"><img class="col-md-12 cloth-photo" id="photo"
+                                            th:src="@{'data:image/png;base64,'+${cloth.convertBinImageToString()}}"
+                                            alt="PhotoNotFound"/></div>
 
-            </div>
-            <div class="col-md-4 cloth-module">
+                <div class="row col-md-12">
+                    <div class="col-md-2">Type:</div>
+                    <div class="col-md-4" th:text="${cloth.getClothType().name()}"></div>
 
+                    <div class="col-md-2">Season:</div>
+                    <div class="col-md-4" th:text="${cloth.getSeason().getSeasonName()}"></div>
+                </div>
+
+                <div class="row align-text-bottom col-md-12">
+                    <div class="col-md-2">Season:</div>
+                    <div class="col-md-10 row" th:each="ocas : ${cloth.occasion}">
+                        <div class="col-md-3" th:text="${ocas.getOccasionName()}+' '"></div>
+                    </div>
+                </div>
+
+                <!--PRZYCISKI-->
+                <div class="row divider col-md-12">
+                    <a class="col-md-1" th:href="@{'/cloth/update/'+${cloth.getClothId()}}">
+                        <button type="button" class="btn btn-warning btn-sm">EDIT</button>
+                    </a>
+
+                    <a class="col-md-1 offset-10" th:href="@{'/cloth/delete/'+${cloth.getClothId()}}">
+                        <button type="button" class="btn btn-danger btn-sm">X</button>
+                    </a>
+                </div>
             </div>
         </div>
-
-
     </div>
 
 
