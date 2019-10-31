@@ -15,8 +15,9 @@
                 <h1>Add Cloth</h1>
             </div>
             <div class="col-md-12">
-                <form th:action="@{/cloth/add}" method="post" enctype="multipart/form-data" th:object="${cloth}"
+                <form th:action="@{/cloth/add}" method="post" th:object="${cloth}" enctype="multipart/form-data"
                       class="col-md-12 form-container">
+                    <input type="hidden" th:field="*{clothId}" th:value="*{clothId}">
 
                     <!--CLOTH TYPE-->
                     <div class="row col-md-12 form-row-container">
@@ -24,7 +25,9 @@
                             <label for="clothType">Cloth Type:</label>
                         </div>
                         <div class="col-md-6">
-                            <select class="form-control" name="clothType" id="clothType" th:field="*{clothType}">
+                            <select class="form-control" name="clothType" id="clothType" th:field="*{clothType}"
+                                    th:value="*{clothType}">
+
                                 <option th:each="clType: ${clothTypes}" th:text="${clType}"
                                         th:value="${clType}"></option>
                             </select>
@@ -49,6 +52,7 @@
                             <label for="clothType">Occasion:</label>
                         </div>
                         <div class="col-md-6">
+
                             <select class="form-control" name="occasion" id="occasion" th:name="occasionId">
                                 <option th:each="occasionTp: ${occasionList}" th:text="${occasionTp.getOccasionName()}"
                                         th:value="${occasionTp.getOccasionId()}"></option>
@@ -77,13 +81,22 @@
                         <div class="col-md-6">
                             <input class="col-md-12" type="file" id="photo" th:name="file">
                         </div>
+
+                        <div th:if="*{getPhoto() != null}" class="row col-md-12">
+                            <div class="text-in-form col-md-6">
+                                <label for="photo">Current Photo:</label>
+                            </div>
+                            <img class="offset-2 cloth-photo"
+                                 th:src="@{'data:image/png;base64,'+${cloth.convertBinImageToString()}}"
+                                 alt="No photo added yet"/>
+                        </div>
                     </div>
 
                     <!--BUTTONS-->
                     <div class="row col-md-12">
                         <div class="col-md-6">
                             <a th:href="@{${backReferer}}">
-                                <button type="submit" class="btn btn-danger col-md-6 offset-3">Back</button>
+                                <button type="button" class="btn btn-danger col-md-6 offset-3">Back</button>
                             </a>
                         </div>
                         <div class="col-md-6">

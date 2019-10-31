@@ -24,7 +24,6 @@
 }
 
 .form-row-container {
-    background-color: azure;
     padding: 10px;
 }
 
@@ -58,6 +57,13 @@
 }
 
 .divider {
-    border-top: solid 2px black;
+    border-top: solid 2px #5a5a5a;
     background-color: #c3c3c3;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.cloth-photo {
+    height: 350px;
+    width: auto;
 }

@@ -34,11 +34,22 @@ public class ClothService {
         }
 
         try {
+            // edytujesz ciuch i nie ustawiles zadnego pliku
+            if (file.isEmpty() && cloth.getClothId() != null) {
+                Optional<Cloth> clothOptional = clothRepository.findById(cloth.getClothId());
+                if (clothOptional.isPresent()) {
+                    Cloth oldCloth = clothOptional.get();
+                    if (oldCloth.getPhoto() != null && oldCloth.getPhoto().length > 0) {
+                        // ustaw stare zdjęcie
+                        cloth.setPhoto(oldCloth.getPhoto());
+                    }
+                }
+            } else {
+                cloth.setPhoto(file.getBytes());
+            }
+
             cloth.getOccasion().add(optionalOccasion.get());
             cloth.setSeason(optionalSeason.get());
-
-            cloth.setPhoto(file.getBytes());
-
         } catch (IOException e) {
             e.printStackTrace();
             e.getMessage();

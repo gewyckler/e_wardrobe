@@ -27,10 +27,7 @@ public class ClothController {
     @GetMapping("/add")
     public String add(Model model, Cloth cloth, HttpServletRequest request) {
         model.addAttribute("cloth", cloth);
-        model.addAttribute("brands", Brand.values());
-        model.addAttribute("clothTypes", ClothType.values());
-        model.addAttribute("occasionList", occasionService.getAll());
-        model.addAttribute("seasonList", seasonService.getAll());
+        sendListOfTypesOccasionSeason(model);
         model.addAttribute("backReferer", request.getHeader("referer"));
         return "cloth-add";
     }
@@ -51,11 +48,14 @@ public class ClothController {
     }
 
     @GetMapping("/update/{clothId}")
-    public String update(Model model, HttpServletRequest request,
+    public String update(Model model, HttpServletRequest request, MultipartFile file,
                          @PathVariable(name = "clothId") Long clothId) {
         Optional<Cloth> optionalCloth = clothService.getById(clothId);
+
         if (optionalCloth.isPresent()) {
-            model.addAttribute("clothToEdit", optionalCloth.get());
+            Cloth cloth = optionalCloth.get();
+            model.addAttribute("cloth", cloth);
+            sendListOfTypesOccasionSeason(model);
             return "cloth-add";
         }
         return "redirect:" + request.getHeader("referer");
@@ -65,7 +65,13 @@ public class ClothController {
     public String delete(HttpServletRequest request,
                          @PathVariable(name = "clothId") Long clothId) {
         clothService.deleteById(clothId);
-        return "redirect:/cloth/list";
+        return "redirect:" + request.getHeader("referer");
     }
 
+    private void sendListOfTypesOccasionSeason(Model model) {
+        model.addAttribute("brands", Brand.values());
+        model.addAttribute("clothTypes", ClothType.values());
+        model.addAttribute("occasionList", occasionService.getAll());
+        model.addAttribute("seasonList", seasonService.getAll());
+    }
 }
