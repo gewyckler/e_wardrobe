@@ -68,6 +68,17 @@ public class ClothController {
         return "redirect:" + request.getHeader("referer");
     }
 
+    @GetMapping("/filter")
+    public String filter(Model model, HttpServletRequest request) {
+        model.addAttribute("backReferer", request.getHeader("referer"));
+        model.addAttribute("brands", Brand.values());
+        model.addAttribute("clothTypes", ClothType.values());
+        model.addAttribute("occasionList", occasionService.getAll());
+        model.addAttribute("seasonList", seasonService.getAll());
+//        sendListOfTypesOccasionSeason(model);
+        return "filter-view";
+    }
+
     private void sendListOfTypesOccasionSeason(Model model) {
         model.addAttribute("brands", Brand.values());
         model.addAttribute("clothTypes", ClothType.values());

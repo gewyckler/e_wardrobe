@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List</title>
+    <title>cloth_add</title>
     <div th:replace="fragments :: headerlinks" th:remove="tag"></div>
 </head>
 <body>
@@ -10,10 +10,10 @@
 
 <main role="main" class="main">
     <div class="container">
-        <div class="row col=md-12 ">
-            <div class="col-md-12">
-                <h1>Add Cloth</h1>
-            </div>
+        <div class="row col-md-12 ">
+            <!--<div class="col-md-12">-->
+                <!--<h1 class="view-tag">Add Cloth</h1>-->
+            <!--</div>-->
             <div class="col-md-12">
                 <form th:action="@{/cloth/add}" method="post" th:object="${cloth}" enctype="multipart/form-data"
                       class="col-md-12 form-container">
