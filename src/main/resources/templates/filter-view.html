@@ -9,12 +9,11 @@
 <header th:replace="fragments :: navigator"></header>
 <main role="main" class="main">
     <div class="container">
-        <form class="form-container" th:action="@{cloth/filter}" th:method="post">
+        <form th:action="@{/cloth/list}" th:method="get" class="form-container">
             <!--<div class="col-md-12">-->
             <!--<h1 class="view-tag">Filter</h1>-->
             <!--</div>-->
-            <div class="row col-md-12">
-
+            <div class="row col-md-12 filter-column">
 
                 <!--BRANDS-->
                 <div class="col-md-3">
@@ -22,7 +21,7 @@
                         <label for="brand">Brands:</label>
                     </div>
                     <div class="row col-md-12" th:each="br : ${brands}">
-                        <input type="checkbox" id="brand" name="brand"/>
+                        <input id="brand" th:name="brand" type="checkbox"/>
                         <div class="col-md-3" th:text="${br.name()}"></div>
                     </div>
                 </div>
@@ -34,7 +33,7 @@
                     </div>
 
                     <div class="row col-md-5" th:each="clType : ${clothTypes}">
-                        <input id="type" name="type" type="checkbox"/>
+                        <input id="type" th:name="type" type="checkbox"/>
                         <div class="col-md-3" th:text="${clType.name()}"></div>
                     </div>
                 </div>
@@ -46,7 +45,7 @@
                     </div>
 
                     <div class="col-md-5 row" th:each="seas : ${seasonList}">
-                        <input id="season" name="season" type="checkbox"/>
+                        <input id="season" th:name="season" type="checkbox"/>
                         <div class="col-md-3" th:text="${seas.getSeasonName()}"></div>
                     </div>
                 </div>
@@ -58,24 +57,22 @@
                     </div>
 
                     <div class="col-md-5 row" th:each="ocas : ${occasionList}">
-                        <input id="occasion" name="occasion" type="checkbox"/>
+                        <input id="occasion" th:name="occasion" type="checkbox"/>
                         <div class="col-md-3" th:text="${ocas.getOccasionName()}"></div>
                     </div>
                 </div>
-
-                <!--PRZYCISKI-->
-                <div class="row col-md-12">
-                    <div class="col-md-6">
-                        <a th:href="@{${backReferer}}">
-                            <button type="button" class="btn btn-danger col-md-6 offset-3">Back</button>
-                        </a>
-                    </div>
-                    <div class="col-md-6">
-                        <button type="submit" class="btn btn-success col-md-6 offset-3">Accept</button>
-                    </div>
+            </div>
+            <!--PRZYCISKI-->
+            <div class="row col-md-12">
+                <div class="col-md-6">
+                    <a th:href="@{${backReferer}}">
+                        <button type="button" class="btn btn-danger col-md-6 offset-3">Back</button>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-success col-md-6 offset-3">Accept</button>
                 </div>
             </div>
-
         </form>
     </div>
 

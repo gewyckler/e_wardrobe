@@ -8,12 +8,63 @@
 <body class="body">
 <header th:replace="fragments :: navigator"></header>
 <main role="main" class="main">
-    <div class="container">
-        <div class="row col-md-12 cloth-list offset-1">
-            <!--<div class="col-md-12">-->
-                <!--<h1 class="view-tag">Cloth List</h1>-->
-            <!--</div>-->
 
+    <div class="row col-md-12">
+        <div class="container col-md-2 cloth-filter">
+
+            <form th:action="@{/cloth/filter}" th:method="post">
+                <div class="col-md-12" th:text="Filters"></div>
+                <!--BRAND-->
+                <div class="col-md-12">
+                    <label for="brands">Brand:</label>
+                    <div class="col-md-12">
+                        <select th:name="brands" id="brands">
+                            <option th:each="brnd : ${brands}" th:text="${brnd.name()}"
+                                    th:value="${brnd.name()}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--TYPE-->
+                <div class="col-md-12">
+                    <label for="type">Type:</label>
+                    <div class="col-md-12">
+                        <select th:name="type" id="type">
+                            <option th:each="clType : ${clothTypes}" th:text="${clType}" th:value="${clType}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--OCCASION-->
+                <div class="col-md-12">
+                    <label for="occasion">Occasion:</label>
+                    <div class="col-md-12">
+                        <select th:name="occasion" id="occasion" th:field="${clothTypes}">
+                            <option th:each="occas : ${occasionList}" th:text="${occas.getOccasionName()}"
+                                    th:value="${occas.getOccasionId()}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--Season-->
+                <div class="col-md-12">
+                    <label for="season">Season:</label>
+                    <div class="col-md-12">
+                        <select th:name="season" id="season" th:field="${seasonList}">
+                            <option th:each="seas : ${seasonList}" th:text="${seas.getSeasonName()}"
+                                    th:value="${seas.getSeasonId()}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--PRZYCISK-->
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-success">Filter...</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="row container col-md-10">
             <div class="col-md-3 cloth-module" th:each="cloth : ${clothList}">
 
                 <!--BRAND-->

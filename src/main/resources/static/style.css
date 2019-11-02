@@ -50,6 +50,16 @@
     background-color: white;
 }
 
+.cloth-filter {
+    margin-right: 20px;
+    margin-top: 10px;
+    border: solid 2px dimgrey;
+    /*box-shadow: 2px 2px 2px 2px #5a5a5a;*/
+    padding: 5px;
+    background-color: white;
+    height: 400px;
+}
+
 .cloth-brand {
     font-weight: bold;
     font-size: 30px;
@@ -77,4 +87,9 @@
 
 .filter-tag-view {
     font-weight: bold;
+}
+
+.filter-column {
+    margin-bottom: 30px;
+    height: 100px;
 }

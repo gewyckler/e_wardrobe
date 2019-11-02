@@ -25,7 +25,7 @@
                             <label for="clothType">Cloth Type:</label>
                         </div>
                         <div class="col-md-6">
-                            <select class="form-control" name="clothType" id="clothType" th:field="*{clothType}"
+                            <select class="form-control" th:name="clothType" id="clothType" th:field="*{clothType}"
                                     th:value="*{clothType}">
 
                                 <option th:each="clType: ${clothTypes}" th:text="${clType}"

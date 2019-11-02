@@ -57,7 +57,8 @@ public class ClothService {
         clothRepository.save(cloth);
     }
 
-    public List<Cloth> getAll() {
+    public List<Cloth> getAll(String brandName, String clothType, Long occasionId, Long seasonId) {
+        // to:do
         return clothRepository.findAll();
     }
 
@@ -67,5 +68,9 @@ public class ClothService {
 
     public void deleteById(Long clothId) {
         clothRepository.deleteById(clothId);
+    }
+
+    public List<Cloth> getAllMatching(Long brandName, Long clothType, Long seasonId, Long occasionId) {
+        return clothRepository.findAll();
     }
 }

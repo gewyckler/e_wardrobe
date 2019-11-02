@@ -41,14 +41,27 @@ public class ClothController {
     }
 
     @GetMapping("/list")
-    public String list(Model model) {
-        List<Cloth> clothList = clothService.getAll();
+    public String list(@RequestParam(name = "brands", required = false) String brandName,
+                       @RequestParam(name = "type", required = false) String clothType,
+                       @RequestParam(name = "occasion", required = false) Long occasionId,
+                       @RequestParam(name = "season", required = false) Long seasonId,
+                       Model model) {
+
+        List<Cloth> clothList = clothService.getAll(brandName, clothType, occasionId, seasonId);
+
+        model.addAttribute("brands", Brand.values());
+        model.addAttribute("clothTypes", ClothType.values());
+        model.addAttribute("occasionList", occasionService.getAll());
+        model.addAttribute("seasonList", seasonService.getAll());
+
+//        sendListOfTypesOccasionSeason(model);
+
         model.addAttribute("clothList", clothList);
         return "cloth-list";
     }
 
     @GetMapping("/update/{clothId}")
-    public String update(Model model, HttpServletRequest request, MultipartFile file,
+    public String update(Model model, HttpServletRequest request,
                          @PathVariable(name = "clothId") Long clothId) {
         Optional<Cloth> optionalCloth = clothService.getById(clothId);
 
@@ -71,13 +84,21 @@ public class ClothController {
     @GetMapping("/filter")
     public String filter(Model model, HttpServletRequest request) {
         model.addAttribute("backReferer", request.getHeader("referer"));
-        model.addAttribute("brands", Brand.values());
-        model.addAttribute("clothTypes", ClothType.values());
-        model.addAttribute("occasionList", occasionService.getAll());
-        model.addAttribute("seasonList", seasonService.getAll());
-//        sendListOfTypesOccasionSeason(model);
+        sendListOfTypesOccasionSeason(model);
         return "filter-view";
     }
+
+//    @GetMapping("/listFilter")
+//    public String listFilter(@RequestParam(name = "brands", required = false) Long brandId,
+//                             @RequestParam(name = "type", required = false) Long clothId,
+//                             @RequestParam(name = "season", required = false) Long seasonId,
+//                             @RequestParam(name = "occasion", required = false) Long occasionId,
+//                             Model model) {
+//        List<Cloth> clothMatching = clothService.getAllMatching(brandId, clothId, seasonId, occasionId);
+//        model.addAttribute("clothMaching", clothMatching);
+//
+//        return "cloth-filter-list";
+//    }
 
     private void sendListOfTypesOccasionSeason(Model model) {
         model.addAttribute("brands", Brand.values());
