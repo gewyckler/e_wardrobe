@@ -16,7 +16,7 @@ public class Cloth {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long clothId;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private ClothType clothType;
 
     @Enumerated(value = EnumType.STRING)

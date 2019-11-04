@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>cloth_list</title>
+    <title>create_outfit</title>
     <div th:replace="fragments :: headerlinks" th:remove="tag"></div>
 </head>
 <body class="body">
@@ -12,9 +12,9 @@
     <div class="row col-md-12">
         <div class="container col-md-2 cloth-filter">
 
-            <form th:action="@{/cloth/list}" th:method="get">
+            <form th:action="@{/cloth/outfit}" th:method="post">
                 <div class="col-md-12" th:text="Filters"></div>
-                <!--BRAND-->
+                <!--GŁOWA-->
                 <div class="col-md-12">
                     <label for="brands">Brand:</label>
                     <div class="col-md-12">
@@ -63,7 +63,7 @@
 
                 <!--PRZYCISK-->
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-success">Filter</button>
+                    <button type="submit" class="btn btn-success">Create</button>
                 </div>
             </form>
         </div>
@@ -101,14 +101,9 @@
                 <div class="col-md-12 divider"></div>
 
                 <!--PRZYCISKI-->
-                <a class="col-md-1" th:href="@{'/cloth/update/'+${cloth.getClothId()}}">
-                    <button type="button" class="btn btn-warning btn-sm">EDIT</button>
+                <a class="col-md-1 offset-8" th:href="@{'/cloth//'+${cloth.getClothId()}}">
+                    <button type="button" class="btn btn-warning btn-sm">ADD</button>
                 </a>
-
-                <a class="col-md-1 offset-5" th:href="@{'/cloth/delete/'+${cloth.getClothId()}}">
-                    <button type="button" class="btn btn-danger btn-sm" th:text="X"></button>
-                </a>
-
             </div>
         </div>
     </div>
