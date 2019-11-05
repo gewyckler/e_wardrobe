@@ -9,68 +9,116 @@
 <header th:replace="fragments :: navigator"></header>
 <main role="main" class="main">
 
-    <div class="row col-md-12">
-        <div class="container col-md-2 cloth-filter">
-
-            <form th:action="@{/cloth/outfit}" th:method="post">
-                <div class="col-md-12" th:text="Filters"></div>
-                <!--GŁOWA-->
+    <div class="row container col-md-12">
+        <!--FILTRY-->
+        <form class="row col-md-12 cloth-filter-row align-content-center" th:action="@{/outfit/listCloth}"
+              th:method="get">
+            <!--BRAND-->
+            <div class="col-md-2">
+                <label for="brands">Brand:</label>
                 <div class="col-md-12">
-                    <label for="brands">Brand:</label>
-                    <div class="col-md-12">
-                        <select th:name="brandsFilter" id="brands">
-                            <option value=""></option>
-                            <option th:each="brnd : ${brands}" th:text="${brnd.name()}"
-                                    th:value="${brnd.name()}"></option>
-                        </select>
-                    </div>
+                    <select th:name="brandsFilter" id="brands">
+                        <option value=""></option>
+                        <option th:each="brnd : ${brands}" th:text="${brnd.name()}"
+                                th:value="${brnd.name()}"></option>
+                    </select>
                 </div>
+            </div>
 
-                <!--TYPE-->
+            <!--TYPE-->
+            <div class="col-md-2">
+                <label for="type">Type:</label>
                 <div class="col-md-12">
-                    <label for="type">Type:</label>
-                    <div class="col-md-12">
-                        <select th:name="typeFilter" id="type">
-                            <option value=""></option>
-                            <option th:each="clType : ${clothTypes}" th:text="${clType}" th:value="${clType}"></option>
-                        </select>
-                    </div>
+                    <select th:name="typeFilter" id="type">
+                        <option value=""></option>
+                        <option th:each="clType : ${clothTypes}" th:text="${clType}" th:value="${clType}"></option>
+                    </select>
                 </div>
+            </div>
 
-                <!--OCCASION-->
+            <!--OCCASION-->
+            <div class="col-md-2">
+                <label for="occasion">Occasion:</label>
                 <div class="col-md-12">
-                    <label for="occasion">Occasion:</label>
-                    <div class="col-md-12">
-                        <select th:name="occasionFilter" id="occasion">
-                            <option value=""></option>
-                            <option th:each="occas : ${occasionList}" th:text="${occas.getOccasionName()}"
-                                    th:value="${occas.getOccasionId()}"></option>
-                        </select>
-                    </div>
+                    <select th:name="occasionFilter" id="occasion">
+                        <option value=""></option>
+                        <option th:each="occas : ${occasionList}" th:text="${occas.getOccasionName()}"
+                                th:value="${occas.getOccasionId()}"></option>
+                    </select>
                 </div>
+            </div>
 
-                <!--Season-->
+            <!--Season-->
+            <div class="col-md-2">
+                <label for="season">Season:</label>
                 <div class="col-md-12">
-                    <label for="season">Season:</label>
-                    <div class="col-md-12">
-                        <select th:name="seasonFilter" id="season">
-                            <option value=""></option>
-                            <option th:each="seas : ${seasonList}" th:text="${seas.getSeasonName()}"
-                                    th:value="${seas.getSeasonId()}"></option>
-                        </select>
+                    <select th:name="seasonFilter" id="season">
+                        <option value=""></option>
+                        <option th:each="seas : ${seasonList}" th:text="${seas.getSeasonName()}"
+                                th:value="${seas.getSeasonId()}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <!--PRZYCISK-->
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-success">Filter</button>
+            </div>
+        </form>
+
+        <!--LIST OF CLOTH IN OUTFIT-->
+        <div class="col-md-5 outfit-create">
+
+            <form class="row col-md-12" th:action="@{/outfit/add}" th:method="post">
+
+                <div class="row container col-md-10 offset-2">
+                    <div class="col-md-3 cloth-module" th:each="cloth : ${outfit.getClothSet()}">
+
+                        <!--BRAND-->
+                        <div class="cloth-brand col-md-12" th:text="${cloth.getBrand().name()}"></div>
+
+                        <!--PHOTO-->
+                        <div class="col-md-12"><img class="col-md-12 cloth-photo" id="photo"
+                                                    th:src="@{'data:image/png;base64,'+${cloth.convertBinImageToString()}}"
+                                                    alt="PhotoNotFound"/></div>
+                        <!--TYPE-->
+                        <div class="row col-md-12">
+                            <div class="col-md-2">T:</div>
+                            <div class="col-md-4" th:text="${cloth.getClothType().name()}"></div>
+                        </div>
+
+                        <div class="row col-md-12">
+                            <!--SEASON-->
+                            <div class="col-md-2">S:</div>
+                            <div class="col-md-4" th:text="${cloth.getSeason().getSeasonName()}"></div>
+                        </div>
+
+                        <!--OCCASION-->
+                        <div class="row align-text-bottom col-md-12">
+                            <div class="col-md-2">O:</div>
+                            <div class="col-md-5 row" th:each="ocas : ${cloth.occasion}">
+                                <div class="col-md-3" th:text="${ocas.getOccasionName()}+' '"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 divider"></div>
+
+                        <a class="col-md-1 offset-5" th:href="@{'/cloth/delete/'+${cloth.getClothId()}}">
+                            <button type="button" class="btn btn-danger btn-sm" th:text="Remove"></button>
+                        </a>
+
                     </div>
                 </div>
 
                 <!--PRZYCISK-->
-                <div class="col-md-12">
+                <div th:if="${!outfit.getClothSet().isEmpty()}" class="col-md-12">
                     <button type="submit" class="btn btn-success">Create</button>
                 </div>
             </form>
         </div>
 
         <!--CIUCHY-->
-        <div class="row container col-md-10 offset-2">
-            <div class="col-md-3 cloth-module" th:each="cloth : ${clothList}">
+        <div class="row container col-md-7">
+            <div class="col-md-4 cloth-module" th:each="cloth : ${clothList}">
 
                 <!--BRAND-->
                 <div class="cloth-brand col-md-12" th:text="${cloth.getBrand().name()}"></div>
@@ -101,9 +149,18 @@
                 <div class="col-md-12 divider"></div>
 
                 <!--PRZYCISKI-->
-                <a class="col-md-1 offset-8" th:href="@{'/cloth//'+${cloth.getClothId()}}">
-                    <button type="button" class="btn btn-warning btn-sm">ADD</button>
-                </a>
+                <div class="row col-md-12">
+                    <a class="col-md-8"
+                       th:href="@{'/outfit/replaceCloth/'+${outfit.getOutfitId()}+'/'+${cloth.getClothId()}}">
+                        <button type="button" class="btn btn-dark btn-sm"
+                                th:text="Replace"></button>
+                    </a>
+                    <a class="col-md-4"
+                       th:href="@{'/outfit/addCloth/'+${outfit.getOutfitId()}+'/'+${cloth.getClothId()}}">
+                        <button type="button" class="btn btn-info btn-sm">ADD</button>
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>

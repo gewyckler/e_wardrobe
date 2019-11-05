@@ -41,6 +41,11 @@ public class Cloth {
     @ManyToOne(fetch = FetchType.EAGER)
     private Season season;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Outfit> outfit = new HashSet<>();
+
     public String convertBinImageToString() {
         if (photo != null && photo.length > 0) {
             return Base64.getEncoder().encodeToString(photo);

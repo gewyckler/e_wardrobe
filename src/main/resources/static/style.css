@@ -30,8 +30,8 @@
 .topnav {
     border-bottom: solid #5a5a5a;
     padding: 10px;
-    z-index: 1;
-    position: sticky;
+    /*z-index: 1;*/
+    /*position: sticky;*/
 }
 
 .text-in-form {
@@ -54,13 +54,20 @@
     margin-top: 10px;
     margin-left: 20px;
     border: solid 2px dimgrey;
-    /*box-shadow: 2px 2px 2px 2px #5a5a5a;*/
     padding: 5px;
     background-color: white;
-    /*height: 400px;*/
     width: 200px;
     position: fixed;
     z-index: 1;
+}
+
+.cloth-filter-row {
+    margin-top: 10px;
+    margin-left: 20px;
+    border: solid 2px dimgrey;
+    padding: 5px;
+    background-color: white;
+    width: 100px;
 }
 
 .cloth-brand {
@@ -88,15 +95,14 @@
     text-align: center;
 }
 
-.filter-tag-view {
-    font-weight: bold;
-}
-
-.filter-column {
-    margin-bottom: 30px;
-    height: 100px;
-}
 
 .btn-success {
     margin-top: 10px;
+}
+
+.outfit-create {
+    margin-top: 10px;
+    margin-right: 10px;
+    box-shadow: 2px 2px 2px 2px #5a5a5a;
+    padding: 5px;
 }
