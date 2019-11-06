@@ -8,6 +8,7 @@ import pl.javagda25.ewardrobe.model.Outfit;
 import pl.javagda25.ewardrobe.repository.ClothRepository;
 import pl.javagda25.ewardrobe.repository.OutfitRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
@@ -33,5 +34,13 @@ public class OutfitService {
                 outfitRepository.save(outfit);
             }
         }
+    }
+
+    public Outfit findById(Long outfitId) {
+        Optional<Outfit> optionalOutfit = outfitRepository.findById(outfitId);
+        if (optionalOutfit.isPresent()) {
+            return optionalOutfit.get();
+        }
+        throw new EntityNotFoundException("not found, id " + outfitId);
     }
 }

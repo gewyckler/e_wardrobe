@@ -3,7 +3,10 @@ package pl.javagda25.ewardrobe.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.javagda25.ewardrobe.model.Brand;
 import pl.javagda25.ewardrobe.model.Cloth;
 import pl.javagda25.ewardrobe.model.ClothType;
@@ -25,24 +28,26 @@ public class OutfitController {
     private final OccasionService occasionService;
     private final SeasonService seasonService;
 
-    @GetMapping("/addCloth/")
-    public String addClothToOutFir(HttpServletRequest request,
-                                   @PathVariable(name = "outfitId") Long outfitId,
-                                   @PathVariable(name = "clothId") Long clothId) {
+    @GetMapping("/addCloth")
+    public String addClothToOutfit(Model model, HttpServletRequest request,
+                                   @RequestParam(name = "outfitId") Long outfitId,
+                                   @RequestParam(name = "clothId") Long clothId) {
         outfitService.addClothToOutfit(outfitId, clothId);
+        Outfit outfit = outfitService.findById(outfitId);
+        model.addAttribute("outfit", outfit);
+        model.addAttribute("clothList", clothService.getAllNoFilter());
 
-        return "redirect:" + request.getHeader("referer");
+        sendListOfTypesOccasionSeason(model);
+
+        return "outfit-add";
     }
 
     @GetMapping("/add")
     public String createOutfit(Model model, Outfit outfit, HttpServletRequest request) {
         model.addAttribute("outfit", outfit);
-        model.addAttribute("clothType", ClothType.values());
         model.addAttribute("backReferer", request.getHeader("referer"));
         model.addAttribute("clothList", clothService.getAllNoFilter());
-
         sendListOfTypesOccasionSeason(model);
-
         outfitService.save(outfit);
 
         return "outfit-add";

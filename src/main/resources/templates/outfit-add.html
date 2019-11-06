@@ -68,12 +68,9 @@
 
         <!--LIST OF CLOTH IN OUTFIT-->
         <div class="col-md-5 outfit-create">
-
             <form class="row col-md-12" th:action="@{/outfit/add}" th:method="post">
-
                 <div class="row container col-md-10 offset-2">
                     <div class="col-md-3 cloth-module" th:each="cloth : ${outfit.getClothSet()}">
-
                         <!--BRAND-->
                         <div class="cloth-brand col-md-12" th:text="${cloth.getBrand().name()}"></div>
 
@@ -156,11 +153,10 @@
                                 th:text="Replace"></button>
                     </a>
                     <a class="col-md-4"
-                       th:href="@{'/outfit/addCloth/'+${outfit.getOutfitId()}+'/'+${cloth.getClothId()}}">
+                       th:href="@{'/outfit/addCloth?outfitId='+${outfit.getOutfitId()}+'&clothId='+${cloth.getClothId()}}">
                         <button type="button" class="btn btn-info btn-sm">ADD</button>
                     </a>
                 </div>
-
             </div>
         </div>
     </div>
