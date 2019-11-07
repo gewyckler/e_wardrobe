@@ -10,6 +10,7 @@ import pl.javagda25.ewardrobe.model.Cloth;
 import pl.javagda25.ewardrobe.model.ClothType;
 import pl.javagda25.ewardrobe.service.ClothService;
 import pl.javagda25.ewardrobe.service.OccasionService;
+import pl.javagda25.ewardrobe.service.OutfitService;
 import pl.javagda25.ewardrobe.service.SeasonService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,9 +24,12 @@ public class ClothController {
     private final ClothService clothService;
     private final SeasonService seasonService;
     private final OccasionService occasionService;
+    private final OutfitService outfitService;
 
     @GetMapping("/add")
     public String add(Model model, Cloth cloth, HttpServletRequest request) {
+
+        outfitService.deleteIfNull();
         model.addAttribute("cloth", cloth);
         sendListOfTypesOccasionSeason(model);
         model.addAttribute("backReferer", request.getHeader("referer"));
@@ -46,6 +50,8 @@ public class ClothController {
                        @RequestParam(name = "occasionFilter", required = false) Long occasionId,
                        @RequestParam(name = "seasonFilter", required = false) Long seasonId,
                        Model model, HttpServletRequest request) {
+
+        outfitService.deleteIfNull();
 
         List<Cloth> clothList = clothService.getAll(brandName, clothType, occasionId, seasonId);
 

@@ -9,6 +9,7 @@ import pl.javagda25.ewardrobe.repository.ClothRepository;
 import pl.javagda25.ewardrobe.repository.OutfitRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,14 +25,17 @@ public class OutfitService {
     public void addClothToOutfit(Long outfitId, Long clothId) {
         Optional<Outfit> optionalOutfit = outfitRepository.findById(outfitId);
         Optional<Cloth> optionalCloth = clothRepository.findById(clothId);
-        if (optionalCloth.isPresent() && optionalOutfit.isPresent()) {
+        if (optionalCloth.isPresent()) {
             Cloth cloth = optionalCloth.get();
-            Outfit outfit = optionalOutfit.get();
 
-            ClothType clTypeGiven = cloth.getClothType();
-            if (!outfit.checkIfContains(clTypeGiven)) {
-                outfit.getClothSet().add(cloth);
-                outfitRepository.save(outfit);
+            if (optionalOutfit.isPresent()) {
+                Outfit outfit = optionalOutfit.get();
+
+                ClothType clTypeGiven = cloth.getClothType();
+                if (!outfit.checkIfContains(clTypeGiven)) {
+                    outfit.getClothSet().add(cloth);
+                    outfitRepository.save(outfit);
+                }
             }
         }
     }
@@ -42,5 +46,24 @@ public class OutfitService {
             return optionalOutfit.get();
         }
         throw new EntityNotFoundException("not found, id " + outfitId);
+    }
+
+    public void deleteIfNull() {
+        List<Outfit> outfitList = outfitRepository.findAll();
+        for (Outfit outfit : outfitList) {
+            if (outfit.getClothSet() == null) {
+                outfitRepository.deleteById(outfit.getOutfitId());
+            }
+        }
+    }
+
+    public void removeClothFromOutfit(Long outfitId, Long clothId) {
+        Optional<Outfit> optionalOutfit = outfitRepository.findById(outfitId);
+        Optional<Cloth> optionalCloth = clothRepository.findById(clothId);
+        if (optionalOutfit.isPresent()) {
+            Outfit outfit = optionalOutfit.get();
+            outfit.getClothSet().remove(optionalCloth.get());
+            outfitRepository.save(outfit);
+        }
     }
 }

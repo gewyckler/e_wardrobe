@@ -62,7 +62,7 @@
                 </div>
 
                 <!--PRZYCISK-->
-                <div class="col-md-12">
+                <div class="col-md-12 btn-gap">
                     <button type="submit" class="btn btn-success">Filter</button>
                 </div>
             </form>
@@ -101,13 +101,22 @@
                 <div class="col-md-12 divider"></div>
 
                 <!--PRZYCISKI-->
-                <a class="col-md-1" th:href="@{'/cloth/update/'+${cloth.getClothId()}}">
-                    <button type="button" class="btn btn-warning btn-sm">EDIT</button>
-                </a>
+                <div class="row col-md-12 btn-gap">
+                    <div class="col-md-1">
+                        <a th:href="@{'/cloth/update/'+${cloth.getClothId()}}">
+                            <button type="button" class="btn-sm btn-warning btn-sm">EDIT
+                            </button>
+                        </a>
+                    </div>
 
-                <a class="col-md-1 offset-5" th:href="@{'/cloth/delete/'+${cloth.getClothId()}}">
-                    <button type="button" class="btn btn-danger btn-sm" th:text="X"></button>
-                </a>
+                    <div class="col-md-1">
+                        <a th:href="@{'/cloth/delete/'+${cloth.getClothId()}}">
+                            <button type="button" class="btn-sm btn-danger btn-sm"
+                                    th:text="X"></button>
+                        </a>
+                    </div>
+                </div>
+
 
             </div>
         </div>

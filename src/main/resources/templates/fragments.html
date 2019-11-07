@@ -13,19 +13,24 @@
 <th:block th:fragment="navigator">
     <header>
 
-        <div class="logo col-md-12">LOGO STRONY</div>
-        <div class="container topnav">
+
+        <div class="nav-bar container">
+            <div class="logo col-md-12">LOGO STRONY</div>
             <nav class="row col-md-12 align-items-center">
-                <a th:href="@{/cloth/add}" class="col-md-4">
+                <a th:href="@{/cloth/add}" class="col-md-3">
                     <button type="submit" class="col-md-12 btn btn-dark">Add Cloth</button>
                 </a>
 
-                <a th:href="@{/cloth/list}" class="col-md-4">
+                <a th:href="@{/cloth/list}" class="col-md-3">
                     <button type="submit" class="col-md-12 btn btn-dark">Cloth List</button>
                 </a>
 
-                <a th:href="@{/outfit/add}" class="col-md-4">
+                <a th:href="@{/outfit/add}" class="col-md-3">
                     <button type="submit" class="col-md-12 btn btn-dark">Create Outfit</button>
+                </a>
+
+                <a th:href="@{/outfit/list}" class="col-md-3">
+                    <button type="submit" class="col-md-12 btn btn-dark">List Outfit</button>
                 </a>
             </nav>
         </div>

@@ -10,6 +10,12 @@
     font-style: normal;
 }
 
+.nav-bar {
+    border-bottom: solid #5a5a5a;
+    padding: 10px;
+}
+
+/*CLOTH ADD VIEW*/
 .list-container {
     margin-top: 10px;
     border: solid 1px #5a5a5a;
@@ -27,12 +33,6 @@
     padding: 10px;
 }
 
-.topnav {
-    border-bottom: solid #5a5a5a;
-    padding: 10px;
-    /*z-index: 1;*/
-    /*position: sticky;*/
-}
 
 .text-in-form {
     font-weight: bold;
@@ -42,14 +42,7 @@
     text-shadow: 1px 1px 1px gray;
 }
 
-.cloth-module {
-    margin-right: 20px;
-    margin-top: 10px;
-    box-shadow: 2px 2px 2px 2px #5a5a5a;
-    padding: 5px;
-    background-color: white;
-}
-
+/*FILTER*/
 .cloth-filter {
     margin-top: 10px;
     margin-left: 20px;
@@ -58,22 +51,36 @@
     background-color: white;
     width: 200px;
     position: fixed;
+    left: 0.5%;
     z-index: 1;
 }
 
 .cloth-filter-row {
-    margin-top: 10px;
-    margin-left: 20px;
+    margin-top: 1%;
+    left: 3%;
     border: solid 2px dimgrey;
-    padding: 5px;
+    padding: 0.1%;
     background-color: white;
-    width: 100px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
 }
 
+/*CLOTH LIST*/
 .cloth-brand {
     font-weight: bold;
-    font-size: 30px;
+    font-size: 200%;
     text-align: center;
+    height: auto;
+    width: auto;
+}
+
+.cloth-module {
+    margin-right: 20px;
+    margin-top: 10px;
+    box-shadow: 2px 2px 2px 2px #5a5a5a;
+    padding-bottom: 5px;
+    background-color: white;
 }
 
 .divider {
@@ -84,25 +91,87 @@
 }
 
 .cloth-photo {
-    height: 350px;
+    max-height: 400px;
     width: auto;
 }
 
-.view-tag {
-    font-size: 35px;
-    font-weight: bold;
-    font-style: normal;
-    text-align: center;
+/*BUTTONS VIEW*/
+.btn-gap {
+    display: flex;
+    flex-direction: row;
+    padding-top: 5px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-right: 0;
+    margin-left: 0;
 }
 
+/*OTHER*/
+.text-bold {
+    font-weight: bold;
+}
 
-.btn-success {
-    margin-top: 10px;
+/*OUTFIT VIEW*/
+.outfit-cloth-view {
+    padding-left: 40px;
+    padding-top: 10px;
+    padding-bottom: 40px;
+
+}
+
+.list-cloth-view {
+
 }
 
 .outfit-create {
-    margin-top: 10px;
-    margin-right: 10px;
     box-shadow: 2px 2px 2px 2px #5a5a5a;
-    padding: 5px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    position: relative;
+}
+
+.cloth-brand-outfit {
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+}
+
+.cloth-other-outfit {
+    font-size: 10px;
+}
+
+.cloth-photo-outfit {
+    height: auto;
+    width: auto;
+}
+
+.cloth-photo-list {
+    height: auto;
+    width: auto;
+}
+
+.cloth-module-outfit {
+    margin-bottom: 5px;
+    box-shadow: 2px 2px 2px 2px #5a5a5a;
+    padding-bottom: 5px;
+    background-color: white;
+}
+
+.cloth-module-outfit-to-add {
+    /*margin-right: 20px;*/
+    box-shadow: 2px 2px 2px 2px #5a5a5a;
+    padding-bottom: 5px;
+    background-color: white;
+}
+
+.type-name {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.form-outfit-items-center {
+    align-content: center;
+    align-items: center;
 }

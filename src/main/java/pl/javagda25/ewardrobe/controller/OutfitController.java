@@ -29,14 +29,14 @@ public class OutfitController {
     private final SeasonService seasonService;
 
     @GetMapping("/addCloth")
-    public String addClothToOutfit(Model model, HttpServletRequest request,
+    public String addClothToOutfit(Model model,
                                    @RequestParam(name = "outfitId") Long outfitId,
                                    @RequestParam(name = "clothId") Long clothId) {
+
         outfitService.addClothToOutfit(outfitId, clothId);
         Outfit outfit = outfitService.findById(outfitId);
         model.addAttribute("outfit", outfit);
         model.addAttribute("clothList", clothService.getAllNoFilter());
-
         sendListOfTypesOccasionSeason(model);
 
         return "outfit-add";
@@ -44,8 +44,9 @@ public class OutfitController {
 
     @GetMapping("/add")
     public String createOutfit(Model model, Outfit outfit, HttpServletRequest request) {
+        outfitService.deleteIfNull();
         model.addAttribute("outfit", outfit);
-        model.addAttribute("backReferer", request.getHeader("referer"));
+//        model.addAttribute("backReferer", request.getHeader("referer"));
         model.addAttribute("clothList", clothService.getAllNoFilter());
         sendListOfTypesOccasionSeason(model);
         outfitService.save(outfit);
@@ -53,24 +54,38 @@ public class OutfitController {
         return "outfit-add";
     }
 
-    @PostMapping("/outfit")
-    public String createOutfit(Outfit outfit, HttpServletRequest request) {
+    @PostMapping("/add")
+    public String createOutfit(Outfit outfit) {
 
         outfitService.save(outfit);
-        return "redirect:" + request.getHeader("referer");
+        outfitService.deleteIfNull();
+        return "redirect:/cloth/list";
     }
 
     @GetMapping("/listCloth")
-    public String list(@RequestParam(name = "brandsFilter", required = false) Brand brandName,
+    public String list(Model model,
+                       @RequestParam(name = "brandsFilter", required = false) Brand brandName,
                        @RequestParam(name = "typeFilter", required = false) ClothType clothType,
                        @RequestParam(name = "occasionFilter", required = false) Long occasionId,
-                       @RequestParam(name = "seasonFilter", required = false) Long seasonId,
-                       Model model, HttpServletRequest request) {
+                       @RequestParam(name = "seasonFilter", required = false) Long seasonId) {
 
         List<Cloth> clothList = clothService.getAll(brandName, clothType, occasionId, seasonId);
 
         sendListOfTypesOccasionSeason(model);
         model.addAttribute("clothList", clothList);
+        return "outfit-add";
+    }
+
+    @GetMapping("/removeCloth")
+    public String removeClothFromOutfit(Model model, HttpServletRequest request,
+                                        @RequestParam(name = "outfitId") Long outfitId,
+                                        @RequestParam(name = "clothId") Long clothId) {
+        outfitService.removeClothFromOutfit(outfitId, clothId);
+        Outfit outfit = outfitService.findById(outfitId);
+        model.addAttribute("outfit", outfit);
+        model.addAttribute("backReferer", request.getHeader("referer"));
+        model.addAttribute("clothList", clothService.getAllNoFilter());
+        sendListOfTypesOccasionSeason(model);
         return "outfit-add";
     }
 

@@ -43,7 +43,7 @@ public class Cloth {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "clothSet", fetch = FetchType.EAGER)
     private Set<Outfit> outfit = new HashSet<>();
 
     public String convertBinImageToString() {
