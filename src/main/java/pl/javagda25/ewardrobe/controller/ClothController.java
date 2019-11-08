@@ -45,11 +45,10 @@ public class ClothController {
     }
 
     @GetMapping("/list")
-    public String list(@RequestParam(name = "brandsFilter", required = false) Brand brandName,
+    public String list(Model model, @RequestParam(name = "brandsFilter", required = false) Brand brandName,
                        @RequestParam(name = "typeFilter", required = false) ClothType clothType,
                        @RequestParam(name = "occasionFilter", required = false) Long occasionId,
-                       @RequestParam(name = "seasonFilter", required = false) Long seasonId,
-                       Model model, HttpServletRequest request) {
+                       @RequestParam(name = "seasonFilter", required = false) Long seasonId) {
 
         outfitService.deleteIfNull();
 

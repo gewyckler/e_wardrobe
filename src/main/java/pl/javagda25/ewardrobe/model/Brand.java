@@ -5,4 +5,6 @@ public enum Brand {
     PUMA,
     VANS,
     RESERVED,
+    MEDICINE,
+    CROPP,
 }
