@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>outfit_list</title>
+    <div th:replace="fragments :: headerlinks" th:remove="tag"></div>
+</head>
+<body class="body">
+<header th:replace="fragments :: navigator"></header>
+<main role="main" class="main">
+
+    <div class="row col-md-12">
+        <!--CIUCHY-->
+        <div class="container col-md-12">
+            <div class="col-md-12" th:each="outfits : ${outfitList}">
+                <div class="row col-md-12 outfit-module">
+                    <!--NAME-->
+                    <div class="col-md-12" th:text="${outfits.getName()}"></div>
+
+                    <div class="col-md-2" th:each="cloth : ${outfits.getClothSet()}">
+                        <div class="col-md-12 cloth-module">
+                            <!--BRAND-->
+                            <div class="cloth-brand col-md-12" th:text="${cloth.getBrand().name()}"></div>
+
+                            <!--PHOTO-->
+                            <div class="col-md-12"><img class="col-md-12 cloth-photo" id="photo"
+                                                        th:src="@{'data:image/png;base64,'+${cloth.convertBinImageToString()}}"
+                                                        alt="PhotoNotFound"/></div>
+                            <!--TYPE-->
+                            <div class="row col-md-12">
+                                <div class="col-md-2">T:</div>
+                                <div class="col-md-4" th:text="${cloth.getClothType().name()}"></div>
+                            </div>
+
+                            <div class="row col-md-12">
+                                <!--SEASON-->
+                                <div class="col-md-2">S:</div>
+                                <div class="col-md-4" th:text="${cloth.getSeason().getSeasonName()}"></div>
+                            </div>
+
+                            <!--OCCASION-->
+                            <div class="row col-md-12 col-lg-12">
+                                <div class="col-md-2">O:</div>
+                                <div class="col-md-5 row" th:each="ocas : ${cloth.occasion}">
+                                    <div class="col-3" th:text="${ocas.getOccasionName()}+' '"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 divider"></div>
+                        </div>
+
+                    </div>
+                    <!--PRZYCISKI-->
+                    <div class="row col-md-12 btn-top-gap">
+                        <div class="col-md-1">
+                            <a th:href="@{'/outfit/update/'+${outfits.getOutfitId()}}">
+                                <button type="button" class="btn-sm btn-warning btn-sm">EDIT
+                                </button>
+                            </a>
+                        </div>
+
+                        <div class="col-md-1 offset-8">
+                            <a th:href="@{'/outfit/delete/'+${outfits.getOutfitId()}}">
+                                <button type="button" class="btn-sm btn-danger btn-sm"
+                                        th:text="X"></button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer th:replace="fragments:: footer"></footer>
+</main>
+</body>
+</html>

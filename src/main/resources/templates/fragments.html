@@ -29,7 +29,7 @@
                     <button type="submit" class="col-md-12 btn btn-dark">Create Outfit</button>
                 </a>
 
-                <a th:href="@{/outfit/list}" class="col-md-3">
+                <a th:href="@{/outfit/listOutfit}" class="col-md-3">
                     <button type="submit" class="col-md-12 btn btn-dark">List Outfit</button>
                 </a>
             </nav>
@@ -37,13 +37,13 @@
     </header>
 </th:block>
 
-<th:block th:fragment="footerscripts">
-
-</th:block>
 <footer th:fragment="footer">
     <footer class="container">
-        <p><a class="align-items-right" th:href="@{/}">Back to top</a></p>
+        <div class="col-md-2 offset-10">
+            <button type="submit"><a href="#top">Top</a></button>
+        </div>
     </footer>
 </footer>
+
 </body>
 </html>

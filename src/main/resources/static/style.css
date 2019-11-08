@@ -76,11 +76,15 @@
 }
 
 .cloth-module {
-    margin-right: 20px;
-    margin-top: 10px;
+    margin-top: 4%;
     box-shadow: 2px 2px 2px 2px #5a5a5a;
     padding-bottom: 5px;
     background-color: white;
+}
+
+.cloth-field {
+    height: auto;
+    width: auto;
 }
 
 .divider {
@@ -91,12 +95,12 @@
 }
 
 .cloth-photo {
-    max-height: 400px;
+    height: auto;
     width: auto;
 }
 
 /*BUTTONS VIEW*/
-.btn-gap {
+.btn-top-gap {
     display: flex;
     flex-direction: row;
     padding-top: 5px;
@@ -106,20 +110,30 @@
     margin-left: 0;
 }
 
+.top-btn {
+    background-color: #c3c3c3;
+    height: 0.2%;
+    width: 5%;
+    padding: 2px;
+    border: solid 2px #5a5a5a;
+    border-radius: 1px;
+}
+
 /*OTHER*/
 .text-bold {
     font-weight: bold;
 }
 
 /*OUTFIT VIEW*/
+
+.outfit-form {
+    padding-bottom: 1%;
+}
+
 .outfit-cloth-view {
     padding-left: 40px;
     padding-top: 10px;
     padding-bottom: 40px;
-
-}
-
-.list-cloth-view {
 
 }
 
@@ -174,4 +188,9 @@
 .form-outfit-items-center {
     align-content: center;
     align-items: center;
+}
+
+.outfit-module {
+    padding: 1%;
+    border-bottom: solid 3px #c3c3c3;
 }

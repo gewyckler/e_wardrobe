@@ -63,12 +63,12 @@
         <div class="row col-md-12 outfit-cloth-view">
             <!--LIST OF CLOTH IN OUTFIT-->
             <div class="col-md-5 outfit-create">
-                <form class="row col-md-12 form-items-center" th:action="@{/outfit/add}" th:method="post"
+                <form class="row col-md-12 outfit-form" th:action="@{/outfit/add}" th:method="post"
                       th:object="${outfit}">
                     <div class="row container cloth-in-outfit col-md-12">
                         <div class="col-md-12 cloth-brand">Outfit Creator</div>
 
-                        <div class="col-md-6" th:each="cloth : *{getClothSet()}">
+                        <div class="col-md-6" th:each="cloth : ${outfit.getClothSet()}">
                             <div class="col-md-12 cloth-module-outfit">
                                 <!--BRAND-->
                                 <div class="cloth-brand-outfit col-md-12" th:text="${cloth.getBrand().name()}"></div>
@@ -110,21 +110,23 @@
 
                     <!--NAME-->
                     <div class="row col-md-12 type-name">
-                        <label class="col-md-4 text-bold" for="name">Add Name:</label>
-                        <input class="col-md-5" type="text" id="name" th:name="outfitName"
-                               th:field="*{name}"
-                               th:value="*{getName()}" required>
+                        <label class="col-md-4 text-bold" for="nameO">Add Name:</label>
+                        <input class="col-md-5" type="text" id="nameO"
+                               th:field="*{name}" th:value="*{name}" required> <!--th:name="name" -->
                     </div>
 
+                    <!--BUTTONS-->
                     <!--CREATE BUTTONS-->
-                    <div th:if="${!outfit.getClothSet().isEmpty()}" class="row col-md-12">
-                        <button type="submit" class="btn btn-success">Create</button>
+                    <div class="col-md-12">
+                        <div th:if="${!outfit.getClothSet().isEmpty()}" class="row col-md-4 offset-10">
+                            <button type="submit" class="btn btn-success btn-bottom-gap">Create</button>
+                        </div>
                     </div>
                 </form>
             </div>
 
             <!--CLOTH LIST TO ADD-->
-            <div class="row container col-md-7 list-cloth-view">
+            <div class="row container col-md-7">
                 <div class="col-md-4" th:each="cloth : ${clothList}">
                     <div class="col-md-12 cloth-module-outfit">
                         <!--BRAND-->
@@ -178,7 +180,5 @@
 
     <footer th:replace="fragments:: footer"></footer>
 </main>
-
-<div th:replace="fragments::footerscripts"></div>
 </body>
 </html>

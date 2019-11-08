@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row col-md-12 ">
             <!--<div class="col-md-12">-->
-                <!--<h1 class="view-tag">Add Cloth</h1>-->
+            <!--<h1 class="view-tag">Add Cloth</h1>-->
             <!--</div>-->
             <div class="col-md-12">
                 <form th:action="@{/cloth/add}" method="post" th:object="${cloth}" enctype="multipart/form-data"
@@ -107,10 +107,8 @@
             </div>
         </div>
     </div>
-
     <footer th:replace="fragments:: footer"></footer>
 </main>
 
-<div th:replace="fragments::footerscripts"></div>
 </body>
 </html>

@@ -3,10 +3,7 @@ package pl.javagda25.ewardrobe.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pl.javagda25.ewardrobe.model.Brand;
 import pl.javagda25.ewardrobe.model.Cloth;
 import pl.javagda25.ewardrobe.model.ClothType;
@@ -35,6 +32,7 @@ public class OutfitController {
 
         outfitService.addClothToOutfit(outfitId, clothId);
         Outfit outfit = outfitService.findById(outfitId);
+
         model.addAttribute("outfit", outfit);
         model.addAttribute("clothList", clothService.getAllNoFilter());
         sendListOfTypesOccasionSeason(model);
@@ -46,7 +44,7 @@ public class OutfitController {
     public String createOutfit(Model model, Outfit outfit, HttpServletRequest request) {
         outfitService.deleteIfNull();
         model.addAttribute("outfit", outfit);
-//        model.addAttribute("backReferer", request.getHeader("referer"));
+        model.addAttribute("backReferer", request.getHeader("referer"));
         model.addAttribute("clothList", clothService.getAllNoFilter());
         sendListOfTypesOccasionSeason(model);
         outfitService.save(outfit);
@@ -55,11 +53,11 @@ public class OutfitController {
     }
 
     @PostMapping("/add")
-    public String createOutfit(Outfit outfit) {
-
+    public String createOutfit(Outfit outfit/*,*/
+                               /*@RequestParam(name = "name") String name*/) {
+//        outfit.setName(name);
         outfitService.save(outfit);
-        outfitService.deleteIfNull();
-        return "redirect:/cloth/list";
+        return "redirect:/outfit/listOutfit";
     }
 
     @GetMapping("/listCloth")
@@ -76,6 +74,15 @@ public class OutfitController {
         return "outfit-add";
     }
 
+    @GetMapping("/listOutfit")
+    public String listOutfit(Model model, HttpServletRequest request) {
+        outfitService.deleteIfNull();
+        List<Outfit> outfitList = outfitService.findAll();
+        model.addAttribute("outfitList", outfitList);
+        model.addAttribute("backReferer", request.getHeader("referer"));
+        return "outfit-list";
+    }
+
     @GetMapping("/removeCloth")
     public String removeClothFromOutfit(Model model, HttpServletRequest request,
                                         @RequestParam(name = "outfitId") Long outfitId,
@@ -87,6 +94,13 @@ public class OutfitController {
         model.addAttribute("clothList", clothService.getAllNoFilter());
         sendListOfTypesOccasionSeason(model);
         return "outfit-add";
+    }
+
+    @GetMapping("/delete/{outfitID}")
+    public String deleteOutfit(HttpServletRequest request,
+                               @PathVariable(name = "outfitID") Long outfitId) {
+        outfitService.deteById(outfitId);
+        return "redirect:" + request.getHeader("referer");
     }
 
     private void sendListOfTypesOccasionSeason(Model model) {

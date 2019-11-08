@@ -30,6 +30,7 @@ public class OutfitService {
 
             if (optionalOutfit.isPresent()) {
                 Outfit outfit = optionalOutfit.get();
+                outfit.setName(optionalOutfit.get().getName());
 
                 ClothType clTypeGiven = cloth.getClothType();
                 if (!outfit.checkIfContains(clTypeGiven)) {
@@ -51,7 +52,7 @@ public class OutfitService {
     public void deleteIfNull() {
         List<Outfit> outfitList = outfitRepository.findAll();
         for (Outfit outfit : outfitList) {
-            if (outfit.getClothSet() == null) {
+            if (outfit.getClothSet().isEmpty()) {
                 outfitRepository.deleteById(outfit.getOutfitId());
             }
         }
@@ -65,5 +66,13 @@ public class OutfitService {
             outfit.getClothSet().remove(optionalCloth.get());
             outfitRepository.save(outfit);
         }
+    }
+
+    public List<Outfit> findAll() {
+        return outfitRepository.findAll();
+    }
+
+    public void deteById(Long outfitId) {
+        outfitRepository.deleteById(outfitId);
     }
 }

@@ -11,7 +11,7 @@
 
     <div class="row col-md-12">
         <div class="container col-md-2 cloth-filter">
-
+            <!--FILTERS-->
             <form th:action="@{/cloth/list}" th:method="get">
                 <div class="col-md-12" th:text="Filters"></div>
                 <!--BRAND-->
@@ -62,7 +62,7 @@
                 </div>
 
                 <!--PRZYCISK-->
-                <div class="col-md-12 btn-gap">
+                <div class="col-md-12 btn-top-gap">
                     <button type="submit" class="btn btn-success">Filter</button>
                 </div>
             </form>
@@ -70,53 +70,54 @@
 
         <!--CIUCHY-->
         <div class="row container col-md-10 offset-2">
-            <div class="col-md-3 cloth-module" th:each="cloth : ${clothList}">
+            <div class="col-md-3" th:each="cloth : ${clothList}">
 
-                <!--BRAND-->
-                <div class="cloth-brand col-md-12" th:text="${cloth.getBrand().name()}"></div>
+                <div class="col-md-12 cloth-module">
+                    <!--BRAND-->
+                    <div class="cloth-brand col-md-12" th:text="${cloth.getBrand().name()}"></div>
 
-                <!--PHOTO-->
-                <div class="col-md-12"><img class="col-md-12 cloth-photo" id="photo"
-                                            th:src="@{'data:image/png;base64,'+${cloth.convertBinImageToString()}}"
-                                            alt="PhotoNotFound"/></div>
-                <!--TYPE-->
-                <div class="row col-md-12">
-                    <div class="col-md-2">T:</div>
-                    <div class="col-md-4" th:text="${cloth.getClothType().name()}"></div>
-                </div>
-
-                <div class="row col-md-12">
-                    <!--SEASON-->
-                    <div class="col-md-2">S:</div>
-                    <div class="col-md-4" th:text="${cloth.getSeason().getSeasonName()}"></div>
-                </div>
-
-                <!--OCCASION-->
-                <div class="row align-text-bottom col-md-12">
-                    <div class="col-md-2">O:</div>
-                    <div class="col-md-5 row" th:each="ocas : ${cloth.occasion}">
-                        <div class="col-md-3" th:text="${ocas.getOccasionName()}+' '"></div>
-                    </div>
-                </div>
-                <div class="col-md-12 divider"></div>
-
-                <!--PRZYCISKI-->
-                <div class="row col-md-12 btn-gap">
-                    <div class="col-md-1">
-                        <a th:href="@{'/cloth/update/'+${cloth.getClothId()}}">
-                            <button type="button" class="btn-sm btn-warning btn-sm">EDIT
-                            </button>
-                        </a>
+                    <!--PHOTO-->
+                    <div class="col-md-12"><img class="col-md-12 cloth-photo" id="photo"
+                                                th:src="@{'data:image/png;base64,'+${cloth.convertBinImageToString()}}"
+                                                alt="PhotoNotFound"/></div>
+                    <!--TYPE-->
+                    <div class="row col-md-12">
+                        <div class="col-md-2">T:</div>
+                        <div class="col-md-4" th:text="${cloth.getClothType().name()}"></div>
                     </div>
 
-                    <div class="col-md-1">
-                        <a th:href="@{'/cloth/delete/'+${cloth.getClothId()}}">
-                            <button type="button" class="btn-sm btn-danger btn-sm"
-                                    th:text="X"></button>
-                        </a>
+                    <div class="row col-md-12">
+                        <!--SEASON-->
+                        <div class="col-md-2">S:</div>
+                        <div class="col-md-4" th:text="${cloth.getSeason().getSeasonName()}"></div>
+                    </div>
+
+                    <!--OCCASION-->
+                    <div class="row col-md-12 col-lg-12">
+                        <div class="col-md-2">O:</div>
+                        <div class="col-md-5 row" th:each="ocas : ${cloth.occasion}">
+                            <div class="col-3" th:text="${ocas.getOccasionName()}+' '"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 divider"></div>
+
+                    <!--PRZYCISKI-->
+                    <div class="row col-md-12 btn-top-gap">
+                        <div class="col-md-1">
+                            <a th:href="@{'/cloth/update/'+${cloth.getClothId()}}">
+                                <button type="button" class="btn-sm btn-warning btn-sm">EDIT
+                                </button>
+                            </a>
+                        </div>
+
+                        <div class="col-md-1 offset-8">
+                            <a th:href="@{'/cloth/delete/'+${cloth.getClothId()}}">
+                                <button type="button" class="btn-sm btn-danger btn-sm"
+                                        th:text="X"></button>
+                            </a>
+                        </div>
                     </div>
                 </div>
-
 
             </div>
         </div>
@@ -125,7 +126,5 @@
 
     <footer th:replace="fragments:: footer"></footer>
 </main>
-
-<div th:replace="fragments::footerscripts"></div>
 </body>
 </html>
