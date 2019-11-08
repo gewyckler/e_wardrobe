@@ -14,8 +14,25 @@
         <div class="container col-md-12">
             <div class="col-md-12" th:each="outfits : ${outfitList}">
                 <div class="row col-md-12 outfit-module">
-                    <!--NAME-->
-                    <div class="col-md-12" th:text="${outfits.getName()}"></div>
+                    <!--PRZYCISKI-->
+                    <div class="row col-md-12 btn-top-gap outfit-name">
+                        <div class="col-md-2 offset-2">
+                            <a th:href="@{'/outfit/update/'+${outfits.getOutfitId()}}">
+                                <button type="button" class="btn-sm btn-warning btn-sm">EDIT
+                                </button>
+                            </a>
+                        </div>
+
+                        <!--NAME-->
+                        <div class="col-md-4 cloth-brand" th:text="${outfits.getName()}"></div>
+
+                        <div class="col-md-2 offset-1">
+                            <a th:href="@{'/outfit/delete/'+${outfits.getOutfitId()}}">
+                                <button type="button" class="btn-sm btn-danger btn-sm"
+                                        th:text="X"></button>
+                            </a>
+                        </div>
+                    </div>
 
                     <div class="col-md-2" th:each="cloth : ${outfits.getClothSet()}">
                         <div class="col-md-12 cloth-module">
@@ -49,22 +66,7 @@
                         </div>
 
                     </div>
-                    <!--PRZYCISKI-->
-                    <div class="row col-md-12 btn-top-gap">
-                        <div class="col-md-1">
-                            <a th:href="@{'/outfit/update/'+${outfits.getOutfitId()}}">
-                                <button type="button" class="btn-sm btn-warning btn-sm">EDIT
-                                </button>
-                            </a>
-                        </div>
 
-                        <div class="col-md-1 offset-8">
-                            <a th:href="@{'/outfit/delete/'+${outfits.getOutfitId()}}">
-                                <button type="button" class="btn-sm btn-danger btn-sm"
-                                        th:text="X"></button>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

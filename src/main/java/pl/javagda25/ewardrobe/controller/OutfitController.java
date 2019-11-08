@@ -48,16 +48,24 @@ public class OutfitController {
         model.addAttribute("clothList", clothService.getAllNoFilter());
         sendListOfTypesOccasionSeason(model);
         outfitService.save(outfit);
-
         return "outfit-add";
     }
 
     @PostMapping("/add")
-    public String createOutfit(Outfit outfit/*,*/
-                               /*@RequestParam(name = "name") String name*/) {
-//        outfit.setName(name);
+    public String createOutfit(Outfit outfit) {
         outfitService.save(outfit);
         return "redirect:/outfit/listOutfit";
+    }
+
+    @GetMapping("/update/{outfitId}")
+    public String updateOutfit(Model model, HttpServletRequest request,
+                               @PathVariable(name = "outfitId") Long outfitId) {
+        Outfit outfit = outfitService.findById(outfitId);
+        model.addAttribute("outfit", outfit);
+        model.addAttribute("backReferer", request.getHeader("referer"));
+        model.addAttribute("clothList", clothService.getAllNoFilter());
+        sendListOfTypesOccasionSeason(model);
+        return "outfit-add";
     }
 
     @GetMapping("/listCloth")

@@ -65,6 +65,8 @@
             <div class="col-md-5 outfit-create">
                 <form class="row col-md-12 outfit-form" th:action="@{/outfit/add}" th:method="post"
                       th:object="${outfit}">
+                    <input type="hidden" th:field="*{outfitId}" th:value="*{outfitId}">
+                    <input type="hidden" th:field="*{clothSet}" th:value="*{clothSet}">
                     <div class="row container cloth-in-outfit col-md-12">
                         <div class="col-md-12 cloth-brand">Outfit Creator</div>
 
@@ -99,7 +101,7 @@
                                 <div class="col-md-12 divider"></div>
 
                                 <!--REMOVE BUTTONS-->
-                                <a class="row col-md-12 align-content-right"
+                                <a class="row col-md-12 offset-9"
                                    th:href="@{'/outfit/removeCloth?outfitId='+${outfit.getOutfitId()}+'&clothId='+${cloth.getClothId()}}">
                                     <button type="button" class="btn btn-danger btn-sm"
                                             th:text="X"></button>
