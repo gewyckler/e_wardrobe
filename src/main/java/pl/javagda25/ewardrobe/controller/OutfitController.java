@@ -1,6 +1,6 @@
 package pl.javagda25.ewardrobe.controller;
 
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -8,22 +8,29 @@ import pl.javagda25.ewardrobe.model.Brand;
 import pl.javagda25.ewardrobe.model.Cloth;
 import pl.javagda25.ewardrobe.model.ClothType;
 import pl.javagda25.ewardrobe.model.Outfit;
-import pl.javagda25.ewardrobe.service.ClothService;
-import pl.javagda25.ewardrobe.service.OccasionService;
-import pl.javagda25.ewardrobe.service.OutfitService;
-import pl.javagda25.ewardrobe.service.SeasonService;
+import pl.javagda25.ewardrobe.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@AllArgsConstructor
 @RequestMapping("/outfit/")
 public class OutfitController {
-    private final OutfitService outfitService;
-    private final ClothService clothService;
-    private final OccasionService occasionService;
-    private final SeasonService seasonService;
+    private OutfitService outfitService;
+    private ClothService clothService;
+    private OccasionService occasionService;
+    private SeasonService seasonService;
+    private BrandService brandService;
+
+    @Autowired
+    public OutfitController(OutfitService outfitService, ClothService clothService, OccasionService occasionService,
+                            SeasonService seasonService, BrandService brandService) {
+        this.outfitService = outfitService;
+        this.clothService = clothService;
+        this.occasionService = occasionService;
+        this.seasonService = seasonService;
+        this.brandService = brandService;
+    }
 
     @GetMapping("/addCloth")
     public String addClothToOutfit(Model model,
@@ -116,7 +123,7 @@ public class OutfitController {
     }
 
     private void sendListOfTypesOccasionSeason(Model model) {
-        model.addAttribute("brands", Brand.values());
+        model.addAttribute("brands", brandService.getAll());
         model.addAttribute("clothTypes", ClothType.values());
         model.addAttribute("occasionList", occasionService.getAll());
         model.addAttribute("seasonList", seasonService.getAll());

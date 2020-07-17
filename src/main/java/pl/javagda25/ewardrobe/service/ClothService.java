@@ -1,6 +1,6 @@
 package pl.javagda25.ewardrobe.service;
 
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import pl.javagda25.ewardrobe.model.*;
@@ -16,12 +16,18 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
 public class ClothService {
 
-    private final ClothRepository clothRepository;
-    private final OccasionRepository occasionRepository;
-    private final SeasonRepository seasonRepository;
+    private ClothRepository clothRepository;
+    private OccasionRepository occasionRepository;
+    private SeasonRepository seasonRepository;
+
+    @Autowired
+    public ClothService(ClothRepository clothRepository, OccasionRepository occasionRepository, SeasonRepository seasonRepository) {
+        this.clothRepository = clothRepository;
+        this.occasionRepository = occasionRepository;
+        this.seasonRepository = seasonRepository;
+    }
 
     public void addCloth(Cloth cloth, Long occasionId, Long seasonId, MultipartFile file) {
         Optional<Season> optionalSeason = seasonRepository.findById(seasonId);

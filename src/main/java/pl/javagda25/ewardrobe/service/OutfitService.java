@@ -1,6 +1,6 @@
 package pl.javagda25.ewardrobe.service;
 
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.javagda25.ewardrobe.model.Cloth;
 import pl.javagda25.ewardrobe.model.ClothType;
@@ -13,10 +13,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 public class OutfitService {
-    private final OutfitRepository outfitRepository;
-    private final ClothRepository clothRepository;
+    @Autowired
+    private OutfitRepository outfitRepository;
+    @Autowired
+    private ClothRepository clothRepository;
 
     public void save(Outfit outfit) {
         outfitRepository.save(outfit);

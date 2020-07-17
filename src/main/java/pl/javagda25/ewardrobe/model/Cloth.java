@@ -1,7 +1,6 @@
 package pl.javagda25.ewardrobe.model;
 
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Base64;
@@ -20,7 +19,9 @@ public class Cloth {
     @Enumerated(EnumType.STRING)
     private ClothType clothType;
 
-    @Enumerated(value = EnumType.STRING)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(fetch = FetchType.EAGER)
     private Brand brand;
 
     @Lob
@@ -30,7 +31,7 @@ public class Cloth {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
-    private User user;
+    private Account account;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -51,6 +52,7 @@ public class Cloth {
         if (photo != null && photo.length > 0) {
             return Base64.getEncoder().encodeToString(photo);
         }
+
         return "";
     }
 }

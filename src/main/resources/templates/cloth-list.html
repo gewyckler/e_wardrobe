@@ -68,29 +68,34 @@
             </form>
         </div>
 
-        <!--CIUCHY-->
+        <!--CLOTHES-->
         <div class="row container col-md-10 offset-2">
             <div class="col-md-3" th:each="cloth : ${clothList}">
 
                 <div class="col-md-12 cloth-module">
-                    <!--BRAND-->
-                    <div class="cloth-brand col-md-12" th:text="${cloth.getBrand().name()}"></div>
+                    <div class="row col-md-12">
+                        <!--SEASON-->
+                        <div th:text="${cloth.getSeason().getSeasonName().name()}"></div>
+                        <div class="col-md-1 offset-11" th:if="${cloth.season.inSeason()}">
+                            <img class="season-logo"
+                                 th:src="@{'data:image/png;base64,'+${cloth.getSeason().getSeasonName().convertBinImageToString()}}"
+                                 alt="Logo Not Found">
+                        </div>
+
+                        <!--BRAND-->
+                        <div class="cloth-brand col-md-12" th:text="${cloth.getBrand().name()}"></div>
+                    </div>
 
                     <!--PHOTO-->
                     <div class="col-md-12"><img class="col-md-12 cloth-photo" id="photo"
                                                 th:src="@{'data:image/png;base64,'+${cloth.convertBinImageToString()}}"
-                                                alt="PhotoNotFound"/></div>
+                                                alt="Photo Not Found"/></div>
                     <!--TYPE-->
                     <div class="row col-md-12">
                         <div class="col-md-2">T:</div>
                         <div class="col-md-4" th:text="${cloth.getClothType().name()}"></div>
                     </div>
 
-                    <div class="row col-md-12">
-                        <!--SEASON-->
-                        <div class="col-md-2">S:</div>
-                        <div class="col-md-4" th:text="${cloth.getSeason().getSeasonName()}"></div>
-                    </div>
 
                     <!--OCCASION-->
                     <div class="row col-md-12 col-lg-12">
@@ -118,9 +123,10 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+
         </div>
+    </div>
     </div>
 
 

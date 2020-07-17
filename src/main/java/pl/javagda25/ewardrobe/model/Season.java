@@ -20,6 +20,13 @@ public class Season {
     @Enumerated(EnumType.STRING)
     private SeasonName seasonName;
 
+    @OneToMany(mappedBy = "clothId", fetch = FetchType.EAGER)
+    private List<Cloth> clothListSeason;
+
+    public Season(SeasonName seasonName) {
+        this.seasonName = seasonName;
+    }
+
     public Boolean inSeason() {
         int currentDay = LocalDate.now().getDayOfYear();
         if (currentDay <= seasonName.getEndDay() && currentDay >= seasonName.getStartDay()) {
@@ -27,11 +34,4 @@ public class Season {
         }
         return false;
     }
-
-    public Season(SeasonName seasonName) {
-        this.seasonName = seasonName;
-    }
-
-    @OneToMany(mappedBy = "clothId", fetch = FetchType.EAGER)
-    private List<Cloth> clothListSeason;
 }

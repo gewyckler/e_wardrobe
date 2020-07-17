@@ -99,12 +99,20 @@
     width: auto;
 }
 
+.season-logo {
+    position: fixed;
+    margin-top: 5px;
+    width: 20px;
+    height: 20px;
+
+}
+
 /*BUTTONS VIEW*/
 .btn-top-gap {
     display: flex;
     flex-direction: row;
-    padding-top: 1%;
-    padding-left: 0;
+    padding-top: 5%;
+    padding-left: 10%;
     padding-right: 0;
     margin-right: 0;
     margin-left: 0;

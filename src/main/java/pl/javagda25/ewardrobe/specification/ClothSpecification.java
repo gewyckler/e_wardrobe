@@ -1,6 +1,6 @@
 package pl.javagda25.ewardrobe.specification;
 
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import pl.javagda25.ewardrobe.model.Cloth;
 import pl.javagda25.ewardrobe.model.dto.SearchCriteria;
@@ -12,9 +12,9 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
 public class ClothSpecification implements Specification<Cloth> {
 
+    @Autowired
     private SearchCriteria criteria;
 
     @Override
@@ -37,12 +37,12 @@ public class ClothSpecification implements Specification<Cloth> {
             predicateList.add(builder.equal(
                     root.<String>get("occasion"), criteria.getOccasionId()));
         }
-        if(predicateList.isEmpty()){
+        if (predicateList.isEmpty()) {
             return null;
         }
         Predicate finalPredicate = predicateList.get(0);
         predicateList.remove(0);
-        while (!predicateList.isEmpty()){
+        while (!predicateList.isEmpty()) {
             Predicate predicate = predicateList.get(0);
             predicateList.remove(0);
             finalPredicate = builder.and(finalPredicate, predicate);
