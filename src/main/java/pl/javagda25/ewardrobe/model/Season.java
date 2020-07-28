@@ -14,13 +14,13 @@ import java.util.List;
 @NoArgsConstructor
 public class Season {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long seasonId;
 
     @Enumerated(EnumType.STRING)
     private SeasonName seasonName;
 
-    @OneToMany(mappedBy = "clothId", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "season", fetch = FetchType.EAGER)
     private List<Cloth> clothListSeason;
 
     public Season(SeasonName seasonName) {

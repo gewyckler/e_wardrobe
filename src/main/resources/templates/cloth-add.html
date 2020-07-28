@@ -21,10 +21,10 @@
 
                     <!--CLOTH TYPE-->
                     <div class="row col-md-12 form-row-container">
-                        <div class="text-in-form col-md-6">
+                        <div class="text-in-form col-md-5">
                             <label for="clothType">Cloth Type:</label>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <select class="form-control" th:name="clothType" id="clothType" th:field="*{clothType}"
                                     th:value="*{clothType}">
 
@@ -36,24 +36,37 @@
 
                     <!--BRAND-->
                     <div class="row col-md-12 form-row-container">
-                        <div class="text-in-form col-md-6">
+                        <div class="text-in-form col-md-5">
                             <label for="brand">Brand:</label>
                         </div>
-                        <div class="col-md-6">
-                            <select class="form-control" name="brand" id="brand" th:field="*{brand}">
-                                <option th:each="brnd : ${brands}" th:text="${brnd.name()}" th:value="${brnd}"></option>
+                        <div class="col-md-5">
+                            <select class="form-control" th:name="brandId" id="brand">
+                                <option th:each="brand : ${brands}"
+                                        th:value="${brand.getBrandId()}"
+                                        th:text="${brand.getName()}"></option>
                             </select>
+                        </div>
+                        <!--ADD BRAND-->
+                        <div class="col-md-2">
+                            <a th:href="@{/brand/add}"
+                               onclick="centeredPopup(this.href,'myWindow','700','300','yes');
+                               return false">
+                                <button type="button" class="btn-warning center_newbtn">New</button>
+                            </a>
+                            <!--<a th:href="@{/brand/add}">-->
+                            <!--<button type="button" class="btn-warning center_newbtn">New</button>-->
+                            <!--</a>-->
                         </div>
                     </div>
 
                     <!--OCCASION-->
                     <div class="row col-md-12 form-row-container">
-                        <div class="text-in-form col-md-6">
-                            <label for="clothType">Occasion:</label>
+                        <div class="text-in-form col-md-5">
+                            <label for="occasion">Occasion:</label>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-5">
 
-                            <select class="form-control" name="occasion" id="occasion" th:name="occasionId">
+                            <select class="form-control" th:name="occasionId" id="occasion">
                                 <option th:each="occasionTp: ${occasionList}" th:text="${occasionTp.getOccasionName()}"
                                         th:value="${occasionTp.getOccasionId()}"></option>
                             </select>
@@ -62,11 +75,11 @@
 
                     <!--SEASON-->
                     <div class="row col-md-12 form-row-container">
-                        <div class="text-in-form col-md-6">
-                            <label for="clothType">Season:</label>
+                        <div class="text-in-form col-md-5">
+                            <label for="season">Season:</label>
                         </div>
-                        <div class="col-md-6">
-                            <select class="form-control" name="season" id="season" th:name="seasonId">
+                        <div class="col-md-5">
+                            <select class="form-control" th:name="seasonId" id="season">
                                 <option th:each="seasonTp: ${seasonList}" th:text="${seasonTp.getSeasonName()}"
                                         th:value="${seasonTp.getSeasonId()}"></option>
                             </select>
@@ -75,14 +88,14 @@
 
                     <!--PHOTO-->
                     <div class="row col-md-12 form-row-container">
-                        <div class="text-in-form col-md-6">
+                        <div class="text-in-form col-md-5">
                             <label for="photo">Photo:</label>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <input class="col-md-12" type="file" id="photo" th:name="file">
                         </div>
 
-                        <div th:if="*{getPhoto() != null}" class="row col-md-12">
+                        <div th:if="${cloth.getPhoto() != null}" class="row col-md-12">
                             <div class="text-in-form col-md-6">
                                 <label for="photo">Current Photo:</label>
                             </div>
@@ -108,7 +121,19 @@
         </div>
     </div>
     <footer th:replace="fragments:: footer"></footer>
-</main>
 
+    <!--<script language="javascript">-->
+        <!--var popupWindow = null;-->
+
+        <!--function centeredPopup(url, winName, w, h, scroll) {-->
+            <!--LeftPosition = (screen.width) ? (screen.width - w) / 2 : 0;-->
+            <!--TopPosition = (screen.height) ? (screen.height - h) / 2 : 0;-->
+            <!--settings =-->
+                <!--'height=' + h + ',width=' + w + ',top=' + TopPosition + ',left=' + LeftPosition + ',scrollbars=' + scroll + ',resizable'-->
+            <!--popupWindow = window.open(url, winName, settings)-->
+        <!--}-->
+    <!--</script>-->
+
+</main>
 </body>
 </html>

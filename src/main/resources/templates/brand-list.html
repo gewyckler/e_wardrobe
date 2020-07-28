@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>cloth_list</title>
+    <div th:replace="fragments :: headerlinks" th:remove="tag"></div>
+</head>
+<body class="body">
+<header th:replace="fragments :: navigator"></header>
+<main role="main" class="main">
+
+    <div class="row col-md-12">
+
+        <!--CLOTHES-->
+        <div class="row container col-md-12">
+            <div class="row col-md-12" th:each="brand : ${brandList}">
+
+                <!--ID-->
+                <div class="col-md-2" th:text="${brand.brandId}"></div>
+
+                <!--NAME-->
+                <div class="col-md-10" th:text="${brand.name}"></div>
+
+                <!--&lt;!&ndash;PRZYCISKI&ndash;&gt;
+                <div class="row col-md-12 btn-top-gap">
+                    <div class="col-md-1">
+                        <a th:href="@{'/cloth/update/'+${cloth.getClothId()}}">
+                            <button type="button" class="btn-sm btn-warning btn-sm">EDIT
+                            </button>
+                        </a>
+                    </div>
+
+                    <div class="col-md-1 offset-8">
+                        <a th:href="@{'/cloth/delete/'+${cloth.getClothId()}}">
+                            <button type="button" class="btn-sm btn-danger btn-sm"
+                                    th:text="X"></button>
+                        </a>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="fragments:: footer"></footer>
+</main>
+</body>
+</html>

@@ -1,4 +1,4 @@
-/*MOJE*/
+/*MAIN*/
 .body {
     background-color: whitesmoke;
 }
@@ -32,7 +32,6 @@
 .form-row-container {
     padding: 10px;
 }
-
 
 .text-in-form {
     font-weight: bold;
@@ -108,6 +107,20 @@
 }
 
 /*BUTTONS VIEW*/
+
+.back-to-top-btn {
+    margin-bottom: 1%;
+}
+
+.center_newbtn {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
 .btn-top-gap {
     display: flex;
     flex-direction: row;

@@ -19,19 +19,19 @@ public class Cloth {
     @Enumerated(EnumType.STRING)
     private ClothType clothType;
 
+    @ManyToOne
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToOne(fetch = FetchType.EAGER)
     private Brand brand;
 
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private byte[] photo;
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Account account;
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    private Account account;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -52,7 +52,6 @@ public class Cloth {
         if (photo != null && photo.length > 0) {
             return Base64.getEncoder().encodeToString(photo);
         }
-
         return "";
     }
 }

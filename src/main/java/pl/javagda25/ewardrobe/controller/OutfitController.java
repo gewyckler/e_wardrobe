@@ -78,7 +78,7 @@ public class OutfitController {
     @GetMapping("/listCloth")
     public String list(Model model,
                        @RequestParam(name = "outfitId") Long outfitId,
-                       @RequestParam(name = "brandsFilter", required = false) Brand brandName,
+                       @RequestParam(name = "brandsFilter", required = false) String brandName,
                        @RequestParam(name = "typeFilter", required = false) ClothType clothType,
                        @RequestParam(name = "occasionFilter", required = false) Long occasionId,
                        @RequestParam(name = "seasonFilter", required = false) Long seasonId) {

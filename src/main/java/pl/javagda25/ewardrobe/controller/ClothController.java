@@ -1,11 +1,10 @@
 package pl.javagda25.ewardrobe.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import pl.javagda25.ewardrobe.model.Brand;
 import pl.javagda25.ewardrobe.model.Cloth;
 import pl.javagda25.ewardrobe.model.ClothType;
 import pl.javagda25.ewardrobe.service.*;
@@ -14,24 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Controller
 @RequestMapping("/cloth/")
 public class ClothController {
-    private ClothService clothService;
-    private SeasonService seasonService;
-    private OccasionService occasionService;
-    private OutfitService outfitService;
-    private BrandService brandService;
-
-    @Autowired
-    public ClothController(ClothService clothService, SeasonService seasonService, OccasionService occasionService,
-                           OutfitService outfitService, BrandService brandService) {
-        this.clothService = clothService;
-        this.seasonService = seasonService;
-        this.occasionService = occasionService;
-        this.outfitService = outfitService;
-        this.brandService = brandService;
-    }
+    private final ClothService clothService;
+    private final SeasonService seasonService;
+    private final OccasionService occasionService;
+    private final OutfitService outfitService;
+    private final BrandService brandService;
 
     @GetMapping("/add")
     public String add(Model model, Cloth cloth, HttpServletRequest request) {
@@ -44,14 +34,14 @@ public class ClothController {
 
     @PostMapping("/add")
     public String add(@RequestParam(name = "file") MultipartFile file,
-                      Cloth cloth, Long occasionId, Long seasonId) {
+                      Cloth cloth, Long occasionId, Long seasonId, Long brandId) {
 
-        clothService.addCloth(cloth, occasionId, seasonId, file);
+        clothService.addCloth(cloth, occasionId, seasonId, brandId, file);
         return "redirect:/cloth/list";
     }
 
     @GetMapping("/list")
-    public String list(Model model, @RequestParam(name = "brandsFilter", required = false) Brand brandName,
+    public String list(Model model, @RequestParam(name = "brandsFilter", required = false) String brandName,
                        @RequestParam(name = "typeFilter", required = false) ClothType clothType,
                        @RequestParam(name = "occasionFilter", required = false) Long occasionId,
                        @RequestParam(name = "seasonFilter", required = false) Long seasonId) {
@@ -60,7 +50,11 @@ public class ClothController {
 
         List<Cloth> clothList = clothService.getAll(brandName, clothType, occasionId, seasonId);
 
-        sendListOfTypesOccasionSeason(model);
+//        sendListOfTypesOccasionSeason(model);
+        model.addAttribute("brands", brandService.getAll());
+        model.addAttribute("clothTypes", ClothType.values());
+        model.addAttribute("occasionList", occasionService.getAll());
+        model.addAttribute("seasonList", seasonService.getAll());
         model.addAttribute("clothList", clothList);
         return "cloth-list";
     }

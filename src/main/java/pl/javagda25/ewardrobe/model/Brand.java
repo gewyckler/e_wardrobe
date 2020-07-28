@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @Entity
@@ -19,10 +17,9 @@ public class Brand {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long brandId;
 
-    @OneToMany(mappedBy = "clothId", fetch = FetchType.EAGER)
-    private List<Cloth> brandClothList = new ArrayList<>();
+    @OneToMany(mappedBy = "brand", fetch = FetchType.EAGER)
+    private List<Cloth> brandClothList;
 
+    @Column(nullable = false)
     private String name;
-
-    private HashSet<String> usedBrandNames = new HashSet<>();
 }

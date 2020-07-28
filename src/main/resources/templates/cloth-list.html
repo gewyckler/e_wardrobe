@@ -19,9 +19,9 @@
                     <label for="brands">Brand:</label>
                     <div class="col-md-12">
                         <select th:name="brandsFilter" id="brands">
-                            <option value=""></option>
-                            <option th:each="brnd : ${brands}" th:text="${brnd.name()}"
-                                    th:value="${brnd.name()}"></option>
+                            <option value="-"></option>
+                            <option th:each="brand : ${brands}" th:text="${brand.name}"
+                                    th:value="${brand.name}"></option>
                         </select>
                     </div>
                 </div>
@@ -78,12 +78,12 @@
                         <div th:text="${cloth.getSeason().getSeasonName().name()}"></div>
                         <div class="col-md-1 offset-11" th:if="${cloth.season.inSeason()}">
                             <img class="season-logo"
-                                 th:src="@{'data:image/png;base64,'+${cloth.getSeason().getSeasonName().convertBinImageToString()}}"
+                                 th:src="@{'data:image/png;base64,'+ ${cloth.getSeason().getSeasonName().convertBinImageToString()}}"
                                  alt="Logo Not Found">
                         </div>
 
                         <!--BRAND-->
-                        <div class="cloth-brand col-md-12" th:text="${cloth.getBrand().name()}"></div>
+                        <div class="cloth-brand col-md-12" th:text="${cloth.brand.name}"></div>
                     </div>
 
                     <!--PHOTO-->
@@ -128,7 +128,6 @@
         </div>
     </div>
     </div>
-
 
     <footer th:replace="fragments:: footer"></footer>
 </main>

@@ -1,9 +1,10 @@
 package pl.javagda25.ewardrobe.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import pl.javagda25.ewardrobe.model.*;
+import pl.javagda25.ewardrobe.repository.BrandRepository;
 import pl.javagda25.ewardrobe.repository.ClothRepository;
 import pl.javagda25.ewardrobe.repository.OccasionRepository;
 import pl.javagda25.ewardrobe.repository.SeasonRepository;
@@ -15,28 +16,29 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @Service
 public class ClothService {
 
-    private ClothRepository clothRepository;
-    private OccasionRepository occasionRepository;
-    private SeasonRepository seasonRepository;
+    private final ClothRepository clothRepository;
+    private final OccasionRepository occasionRepository;
+    private final SeasonRepository seasonRepository;
+    private final BrandRepository brandRepository;
 
-    @Autowired
-    public ClothService(ClothRepository clothRepository, OccasionRepository occasionRepository, SeasonRepository seasonRepository) {
-        this.clothRepository = clothRepository;
-        this.occasionRepository = occasionRepository;
-        this.seasonRepository = seasonRepository;
-    }
+    public void addCloth(Cloth cloth, Long occasionId, Long seasonId, Long brandId, MultipartFile file) {
 
-    public void addCloth(Cloth cloth, Long occasionId, Long seasonId, MultipartFile file) {
         Optional<Season> optionalSeason = seasonRepository.findById(seasonId);
         Optional<Occasion> optionalOccasion = occasionRepository.findById(occasionId);
+        Optional<Brand> optionalBrand = brandRepository.findById(brandId);
+
         if (!optionalOccasion.isPresent()) {
             throw new EntityNotFoundException("ocassion, id " + occasionId);
         }
         if (!optionalSeason.isPresent()) {
             throw new EntityNotFoundException("season, id " + seasonId);
+        }
+        if (!optionalBrand.isPresent()) {
+            throw new EntityNotFoundException("brand, id " + brandId);
         }
 
         try {
@@ -56,6 +58,7 @@ public class ClothService {
 
             cloth.getOccasion().add(optionalOccasion.get());
             cloth.setSeason(optionalSeason.get());
+            cloth.setBrand(optionalBrand.get());
         } catch (IOException e) {
             e.printStackTrace();
             e.getMessage();
@@ -63,7 +66,7 @@ public class ClothService {
         clothRepository.save(cloth);
     }
 
-    public List<Cloth> getAll(Brand brandName, ClothType clothType, Long occasionId, Long seasonId) {
+    public List<Cloth> getAll(String brandName, ClothType clothType, Long occasionId, Long seasonId) {
         List<Cloth> filterList = clothRepository.findAll();
 //        return clothRepository.findAll(new ClothSpecification(new SearchCriteria(brandName, clothType, occasionId, seasonId)));
 //        return clothRepository.getMyClothesYo(String.valueOf(brandName), seasonId, String.valueOf(clothType), occasionId);
