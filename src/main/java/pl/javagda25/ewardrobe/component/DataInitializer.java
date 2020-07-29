@@ -1,47 +1,43 @@
 package pl.javagda25.ewardrobe.component;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.javagda25.ewardrobe.model.*;
-//import pl.javagda25.ewardrobe.repository.AccountRepository;
-//import pl.javagda25.ewardrobe.repository.AccountRoleRepository;
+import pl.javagda25.ewardrobe.model.enums.OccasionName;
+import pl.javagda25.ewardrobe.model.enums.SeasonName;
+import pl.javagda25.ewardrobe.repository.BrandRepository;
 import pl.javagda25.ewardrobe.repository.OccasionRepository;
 import pl.javagda25.ewardrobe.repository.SeasonRepository;
 
-import java.util.HashSet;
-import java.util.Set;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+//import pl.javagda25.ewardrobe.repository.AccountRepository;
+//import pl.javagda25.ewardrobe.repository.AccountRoleRepository;
 
+@AllArgsConstructor
 @Component
 public class DataInitializer implements ApplicationListener<ContextRefreshedEvent> {
-    private OccasionRepository occasionRepository;
-    private SeasonRepository seasonRepository;
+    private final OccasionRepository occasionRepository;
+    private final SeasonRepository seasonRepository;
+    private final BrandRepository brandRepository;
 //    private AccountRepository accountRepository;
 //    private AccountRoleRepository accountRoleRepository;
 //    private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public DataInitializer(OccasionRepository occasionRepository, SeasonRepository seasonRepository/*,*/
-                           /*AccountRepository accountRepository, AccountRoleRepository accountRoleRepository,
-                           PasswordEncoder passwordEncoder*/) {
-        this.occasionRepository = occasionRepository;
-        this.seasonRepository = seasonRepository;
-//        this.accountRepository = accountRepository;
-//        this.accountRoleRepository = accountRoleRepository;
-//        this.passwordEncoder = passwordEncoder;
-    }
-
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         for (OccasionName occasionName : OccasionName.values()) {
-            addDefaultOccasion(occasionName);
+            addDefaultOccasion(String.valueOf(occasionName));
         }
 
         for (SeasonName seasonName : SeasonName.values()) {
             addDefaultSeason(seasonName);
         }
+
+        addDefaultBrand("NO NAME");
+        //TO DO: add defoult brand object!
+
 //        addDefaultRole("USER");
 //        addDefaultRole("ADMIN");
 //
@@ -86,11 +82,19 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
         }
     }
 
-    private void addDefaultOccasion(OccasionName occasionName) {
+    private void addDefaultOccasion(String occasionName) {
         if (!occasionRepository.existsByOccasionName(occasionName)) {
             Occasion occasion = new Occasion();
             occasion.setOccasionName(occasionName);
             occasionRepository.save(occasion);
+        }
+    }
+
+    private void addDefaultBrand(String brandName) {
+        if (!brandRepository.existsBrandByName(brandName)) {
+            Brand newBrand = new Brand();
+            newBrand.setName(brandName);
+            brandRepository.save(newBrand);
         }
     }
 }

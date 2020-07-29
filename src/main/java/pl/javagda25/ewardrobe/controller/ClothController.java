@@ -22,6 +22,7 @@ public class ClothController {
     private final OccasionService occasionService;
     private final OutfitService outfitService;
     private final BrandService brandService;
+    private final ClothTypeService clothTypeService;
 
     @GetMapping("/add")
     public String add(Model model, Cloth cloth, HttpServletRequest request) {
@@ -52,7 +53,7 @@ public class ClothController {
 
 //        sendListOfTypesOccasionSeason(model);
         model.addAttribute("brands", brandService.getAll());
-        model.addAttribute("clothTypes", ClothType.values());
+        model.addAttribute("clothTypes", clothTypeService.getAll());
         model.addAttribute("occasionList", occasionService.getAll());
         model.addAttribute("seasonList", seasonService.getAll());
         model.addAttribute("clothList", clothList);

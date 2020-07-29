@@ -17,8 +17,7 @@ public class Occasion {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long occasionId;
 
-    @Enumerated(EnumType.STRING)
-    private OccasionName occasionName;
+    private String occasionName;
 
     @ManyToMany(mappedBy = "occasion", fetch = FetchType.EAGER)
     private Set<Cloth> clothListOccasion = new HashSet<>();

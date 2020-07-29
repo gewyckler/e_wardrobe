@@ -3,6 +3,7 @@ package pl.javagda25.ewardrobe.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.javagda25.ewardrobe.model.enums.SeasonName;
 
 import javax.persistence.*;
 import java.time.LocalDate;

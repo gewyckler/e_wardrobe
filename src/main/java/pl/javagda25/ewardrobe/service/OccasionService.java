@@ -15,4 +15,8 @@ public class OccasionService {
     public List<Occasion> getAll() {
         return occasionRepository.findAll();
     }
+
+    public void addOccasion(Occasion newOccasion) {
+        occasionRepository.save(newOccasion);
+    }
 }

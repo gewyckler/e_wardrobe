@@ -16,7 +16,9 @@ public class Cloth {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long clothId;
 
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private ClothType clothType;
 
     @ManyToOne

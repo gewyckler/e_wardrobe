@@ -8,4 +8,5 @@ import pl.javagda25.ewardrobe.model.Brand;
 @Repository
 public interface BrandRepository extends JpaRepository<Brand, Long>, JpaSpecificationExecutor<Brand> {
 
+    boolean existsBrandByName(String brandName);
 }

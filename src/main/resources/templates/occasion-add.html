@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>cloth_add</title>
+    <div th:replace="fragments :: headerlinks" th:remove="tag"></div>
+</head>
+<body>
+<!--<header th:replace="fragments :: navigator"></header>-->
+
+<main role="main" class="main">
+    <div class="container">
+        <div class="row col-md-12 ">
+            <!--<div class="col-md-12">-->
+            <!--<h1 class="view-tag">Add Cloth</h1>-->
+            <!--</div>-->
+            <div class="col-md-12">
+                <form th:action="@{/occasion/add}" method="post" th:object="${occasion}"
+                      class="col-md-12 form-container">
+                    <input type="hidden" th:field="*{occasionId}" th:value="*{occasionId}">
+
+                    <!--BRAND NAME-->
+                    <div class="row col-md-12 form-row-container">
+                        <div class="text-in-form col-md-6">
+                            <label for="occasionName">Name:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" th:name="occasionName"
+                                   id="occasionName" th:field="*{occasionName}"
+                                   th:value="*{occasionName}">
+                        </div>
+                    </div>
+
+                    <!--<a href="JavaScript:window.close()">Close</a>-->
+
+                    <!--BUTTONS-->
+                    <div class="row col-md-12">
+                        <div class="col-md-6">
+                            <a th:href="@{${backReferer}}">
+                                <button type="button" class="btn btn-danger col-md-6 offset-3">Back</button>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <!--<a href="JavaScript:window.close()">-->
+                            <button type="button" class="btn btn-success col-md-6 offset-3">Accept</button>
+                            <!--</a>-->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="fragments:: footer"></footer>
+</main>
+</body>
+</html>

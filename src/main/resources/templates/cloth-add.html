@@ -28,7 +28,8 @@
                             <select class="form-control" th:name="clothType" id="clothType" th:field="*{clothType}"
                                     th:value="*{clothType}">
 
-                                <option th:each="clType: ${clothTypes}" th:text="${clType}"
+                                <option th:each="clType: ${clothTypes}"
+                                        th:text="${clType}"
                                         th:value="${clType}"></option>
                             </select>
                         </div>
@@ -48,14 +49,14 @@
                         </div>
                         <!--ADD BRAND-->
                         <div class="col-md-2">
-                            <a th:href="@{/brand/add}"
-                               onclick="centeredPopup(this.href,'myWindow','700','300','yes');
-                               return false">
-                                <button type="button" class="btn-warning center_newbtn">New</button>
-                            </a>
-                            <!--<a th:href="@{/brand/add}">-->
+                            <!--<a th:href="@{/brand/add}"-->
+                            <!--onclick="centeredPopup(this.href,'myWindow','700','300','yes');-->
+                            <!--return false">-->
                             <!--<button type="button" class="btn-warning center_newbtn">New</button>-->
                             <!--</a>-->
+                            <a th:href="@{/brand/add}">
+                                <button type="button" class="btn-warning center_newbtn">New</button>
+                            </a>
                         </div>
                     </div>
 
@@ -67,9 +68,20 @@
                         <div class="col-md-5">
 
                             <select class="form-control" th:name="occasionId" id="occasion">
-                                <option th:each="occasionTp: ${occasionList}" th:text="${occasionTp.getOccasionName()}"
-                                        th:value="${occasionTp.getOccasionId()}"></option>
+                                <option th:each="occasion: ${occasionList}" th:text="${occasion.getOccasionName()}"
+                                        th:value="${occasion.getOccasionId()}"></option>
                             </select>
+                        </div>
+                        <!--ADD OCCASION-->
+                        <div class="col-md-2">
+                            <!--<a th:href="@{/brand/add}"-->
+                            <!--onclick="centeredPopup(this.href,'myWindow','700','300','yes');-->
+                            <!--return false">-->
+                            <!--<button type="button" class="btn-warning center_newbtn">New</button>-->
+                            <!--</a>-->
+                            <a th:href="@{/occasion/add}">
+                                <button type="button" class="btn-warning center_newbtn">New</button>
+                            </a>
                         </div>
                     </div>
 
@@ -123,15 +135,15 @@
     <footer th:replace="fragments:: footer"></footer>
 
     <!--<script language="javascript">-->
-        <!--var popupWindow = null;-->
+    <!--var popupWindow = null;-->
 
-        <!--function centeredPopup(url, winName, w, h, scroll) {-->
-            <!--LeftPosition = (screen.width) ? (screen.width - w) / 2 : 0;-->
-            <!--TopPosition = (screen.height) ? (screen.height - h) / 2 : 0;-->
-            <!--settings =-->
-                <!--'height=' + h + ',width=' + w + ',top=' + TopPosition + ',left=' + LeftPosition + ',scrollbars=' + scroll + ',resizable'-->
-            <!--popupWindow = window.open(url, winName, settings)-->
-        <!--}-->
+    <!--function centeredPopup(url, winName, w, h, scroll) {-->
+    <!--LeftPosition = (screen.width) ? (screen.width - w) / 2 : 0;-->
+    <!--TopPosition = (screen.height) ? (screen.height - h) / 2 : 0;-->
+    <!--settings =-->
+    <!--'height=' + h + ',width=' + w + ',top=' + TopPosition + ',left=' + LeftPosition + ',scrollbars=' + scroll + ',resizable'-->
+    <!--popupWindow = window.open(url, winName, settings)-->
+    <!--}-->
     <!--</script>-->
 
 </main>

@@ -1,4 +1,4 @@
-package pl.javagda25.ewardrobe.model;
+package pl.javagda25.ewardrobe.model.enums;
 
 import lombok.Getter;
 

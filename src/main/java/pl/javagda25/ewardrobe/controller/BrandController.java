@@ -26,8 +26,8 @@ public class BrandController {
     }
 
     @PostMapping("/add")
-    public String addBrand(Brand brandEmpty) {
-        brandService.addBrand(brandEmpty);
+    public String addBrand(Brand newBrand) {
+        brandService.addBrand(newBrand);
         return "redirect:/cloth/add";
     }
 
