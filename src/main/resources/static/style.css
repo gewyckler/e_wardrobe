@@ -8,11 +8,22 @@
     text-align: center;
     font-family: "Times New Roman";
     font-style: normal;
+    padding-bottom: 1%;
 }
 
 .nav-bar {
     border-bottom: solid #5a5a5a;
-    padding: 10px;
+    padding: 1% 1% 1% 1%;
+}
+
+.overlap-banner {
+    color: #5a5a5a;
+    font-weight: bold;
+    font-family: Calibri;
+    font-size: 175%;
+    text-align: center;
+    padding: 2% 0 1% 0;
+    text-shadow: 1px 1px 1px gray;
 }
 
 /*CLOTH ADD VIEW*/

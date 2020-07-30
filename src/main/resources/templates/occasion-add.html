@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>cloth_add</title>
+    <title>Add Occasion</title>
     <div th:replace="fragments :: headerlinks" th:remove="tag"></div>
 </head>
 <body>
@@ -11,9 +11,7 @@
 <main role="main" class="main">
     <div class="container">
         <div class="row col-md-12 ">
-            <!--<div class="col-md-12">-->
-            <!--<h1 class="view-tag">Add Cloth</h1>-->
-            <!--</div>-->
+            <div class="col-md-12 overlap-banner">Add Occasion</div>
             <div class="col-md-12">
                 <form th:action="@{/occasion/add}" method="post" th:object="${occasion}"
                       class="col-md-12 form-container">
@@ -42,7 +40,7 @@
                         </div>
                         <div class="col-md-6">
                             <!--<a href="JavaScript:window.close()">-->
-                            <button type="button" class="btn btn-success col-md-6 offset-3">Accept</button>
+                            <button type="submit" class="btn btn-success col-md-6 offset-3">Accept</button>
                             <!--</a>-->
                         </div>
                     </div>

@@ -6,4 +6,5 @@ import pl.javagda25.ewardrobe.model.ClothType;
 
 @Repository
 public interface ClothTypeRepository extends JpaRepository<ClothType, Long> {
+    boolean existsByName(String name);
 }

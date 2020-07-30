@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>cloth_list</title>
+    <title>List Cloth</title>
     <div th:replace="fragments :: headerlinks" th:remove="tag"></div>
 </head>
 <body class="body">
@@ -19,9 +19,10 @@
                     <label for="brands">Brand:</label>
                     <div class="col-md-12">
                         <select th:name="brandsFilter" id="brands">
-                            <option value="-"></option>
-                            <option th:each="brand : ${brands}" th:text="${brand.name}"
-                                    th:value="${brand.name}"></option>
+                            <option value=""></option>
+                            <option th:each="brand : ${brands}"
+                                    th:text="${brand.name}"
+                                    th:value="${brand.brandId}"></option>
                         </select>
                     </div>
                 </div>
@@ -32,7 +33,8 @@
                     <div class="col-md-12">
                         <select th:name="typeFilter" id="type">
                             <option value=""></option>
-                            <option th:each="clType : ${clothTypes}" th:text="${clType}" th:value="${clType}"></option>
+                            <option th:each="clType : ${clothTypes}" th:text="${clType.name}"
+                                    th:value="${clType.id}"></option>
                         </select>
                     </div>
                 </div>
@@ -76,11 +78,11 @@
                     <div class="row col-md-12">
                         <!--SEASON-->
                         <div th:text="${cloth.getSeason().getSeasonName().name()}"></div>
-                        <div class="col-md-1 offset-11" th:if="${cloth.season.inSeason()}">
+                        <!--<div class="col-md-1 offset-11" th:if="${cloth.season.inSeason()}">
                             <img class="season-logo"
                                  th:src="@{'data:image/png;base64,'+ ${cloth.getSeason().getSeasonName().convertBinImageToString()}}"
                                  alt="Logo Not Found">
-                        </div>
+                        </div>-->
 
                         <!--BRAND-->
                         <div class="cloth-brand col-md-12" th:text="${cloth.brand.name}"></div>
@@ -93,7 +95,7 @@
                     <!--TYPE-->
                     <div class="row col-md-12">
                         <div class="col-md-2">T:</div>
-                        <div class="col-md-4" th:text="${cloth.getClothType().name()}"></div>
+                        <div class="col-md-4" th:text="${cloth.clothType.name}"></div>
                     </div>
 
 
@@ -101,7 +103,7 @@
                     <div class="row col-md-12 col-lg-12">
                         <div class="col-md-2">O:</div>
                         <div class="col-md-5 row" th:each="ocas : ${cloth.occasion}">
-                            <div class="col-3" th:text="${ocas.getOccasionName()}+' '"></div>
+                            <div class="col-3" th:text="${ocas.occasionName}+' '"></div>
                         </div>
                     </div>
                     <div class="col-md-12 divider"></div>

@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pl.javagda25.ewardrobe.model.Cloth;
-import pl.javagda25.ewardrobe.model.ClothType;
 import pl.javagda25.ewardrobe.service.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,28 +34,29 @@ public class ClothController {
 
     @PostMapping("/add")
     public String add(@RequestParam(name = "file") MultipartFile file,
-                      Cloth cloth, Long occasionId, Long seasonId, Long brandId) {
+                      Cloth cloth, Long clothTypeId, Long brandId, Long occasionId, Long seasonId) {
 
-        clothService.addCloth(cloth, occasionId, seasonId, brandId, file);
+        clothService.addCloth(cloth, clothTypeId, brandId, file, occasionId, seasonId);
         return "redirect:/cloth/list";
     }
 
     @GetMapping("/list")
-    public String list(Model model, @RequestParam(name = "brandsFilter", required = false) String brandName,
-                       @RequestParam(name = "typeFilter", required = false) ClothType clothType,
+    public String list(Model model, @RequestParam(name = "brandsFilter", required = false) Long brandId,
+                       @RequestParam(name = "typeFilter", required = false) Long clothTypeId,
                        @RequestParam(name = "occasionFilter", required = false) Long occasionId,
                        @RequestParam(name = "seasonFilter", required = false) Long seasonId) {
 
         outfitService.deleteIfNull();
 
-        List<Cloth> clothList = clothService.getAll(brandName, clothType, occasionId, seasonId);
+        List<Cloth> clothList = clothService.getAll(brandId, clothTypeId, occasionId, seasonId);
 
 //        sendListOfTypesOccasionSeason(model);
+        model.addAttribute("clothList", clothList);
+
         model.addAttribute("brands", brandService.getAll());
         model.addAttribute("clothTypes", clothTypeService.getAll());
         model.addAttribute("occasionList", occasionService.getAll());
         model.addAttribute("seasonList", seasonService.getAll());
-        model.addAttribute("clothList", clothList);
         return "cloth-list";
     }
 
@@ -84,7 +84,7 @@ public class ClothController {
 
     private void sendListOfTypesOccasionSeason(Model model) {
         model.addAttribute("brands", brandService.getAll());
-        model.addAttribute("clothTypes", ClothType.values());
+        model.addAttribute("clothTypes", clothTypeService.getAll());
         model.addAttribute("occasionList", occasionService.getAll());
         model.addAttribute("seasonList", seasonService.getAll());
     }

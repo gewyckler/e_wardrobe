@@ -4,17 +4,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import pl.javagda25.ewardrobe.model.*;
-import pl.javagda25.ewardrobe.repository.BrandRepository;
-import pl.javagda25.ewardrobe.repository.ClothRepository;
-import pl.javagda25.ewardrobe.repository.OccasionRepository;
-import pl.javagda25.ewardrobe.repository.SeasonRepository;
+import pl.javagda25.ewardrobe.repository.*;
 
 import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -24,9 +20,11 @@ public class ClothService {
     private final OccasionRepository occasionRepository;
     private final SeasonRepository seasonRepository;
     private final BrandRepository brandRepository;
+    private final ClothTypeRepository clothTypeRepository;
 
-    public void addCloth(Cloth cloth, Long occasionId, Long seasonId, Long brandId, MultipartFile file) {
+    public void addCloth(Cloth cloth, Long clothTypeId, Long brandId, MultipartFile file, Long occasionId, Long seasonId) {
 
+        Optional<ClothType> optionalClothType = clothTypeRepository.findById(clothTypeId);
         Optional<Season> optionalSeason = seasonRepository.findById(seasonId);
         Optional<Occasion> optionalOccasion = occasionRepository.findById(occasionId);
         Optional<Brand> optionalBrand = brandRepository.findById(brandId);
@@ -56,9 +54,10 @@ public class ClothService {
                 cloth.setPhoto(file.getBytes());
             }
 
+            cloth.setClothType(optionalClothType.get());
+            cloth.setBrand(optionalBrand.get());
             cloth.getOccasion().add(optionalOccasion.get());
             cloth.setSeason(optionalSeason.get());
-            cloth.setBrand(optionalBrand.get());
         } catch (IOException e) {
             e.printStackTrace();
             e.getMessage();
@@ -66,16 +65,20 @@ public class ClothService {
         clothRepository.save(cloth);
     }
 
-    public List<Cloth> getAll(String brandName, ClothType clothType, Long occasionId, Long seasonId) {
+    public List<Cloth> getAll(Long brandId, Long clothTypeId, Long occasionId, Long seasonId) {
         List<Cloth> filterList = clothRepository.findAll();
 //        return clothRepository.findAll(new ClothSpecification(new SearchCriteria(brandName, clothType, occasionId, seasonId)));
 //        return clothRepository.getMyClothesYo(String.valueOf(brandName), seasonId, String.valueOf(clothType), occasionId);
-        if (brandName != null || clothType != null || occasionId != null || seasonId != null) {
-            if (brandName != null) {
-                filterList = filterList.stream().filter(brand -> brand.getBrand().equals(brandName)).collect(Collectors.toList());
+        if (brandId != null || clothTypeId != null || occasionId != null || seasonId != null) {
+            if (brandId != null) {
+                Brand brand = brandRepository.getOne(brandId);
+                filterList = new ArrayList<>(brand.getBrandClothList());
+//                filterList = filterList.stream().filter(brand -> brand.getBrand().equals(brandName)).collect(Collectors.toList());
             }
-            if (clothType != null) {
-                filterList = filterList.stream().filter(type -> type.getClothType().equals(clothType)).collect(Collectors.toList());
+            if (clothTypeId != null) {
+                ClothType clothType = clothTypeRepository.getOne(clothTypeId);
+                filterList = new ArrayList<>(clothType.getClothList());
+//                filterList = filterList.stream().filter(type -> type.getClothType().equals(clothType)).collect(Collectors.toList());
             }
             if (occasionId != null) {
                 Occasion occasion = occasionRepository.getOne(occasionId);

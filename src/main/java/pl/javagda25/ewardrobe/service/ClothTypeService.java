@@ -15,4 +15,9 @@ public class ClothTypeService {
     public List<ClothType> getAll() {
         return clothTypeRepository.findAll();
     }
+
+    public void add(ClothType clothType) {
+        clothType.setName(clothType.getName().toUpperCase());
+        clothTypeRepository.save(clothType);
+    }
 }

@@ -1,7 +1,6 @@
 package pl.javagda25.ewardrobe.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.javagda25.ewardrobe.model.*;
@@ -9,7 +8,7 @@ import pl.javagda25.ewardrobe.model.*;
 import java.util.List;
 
 @Repository
-public interface ClothRepository extends JpaRepository<Cloth, Long>, JpaSpecificationExecutor<Cloth> {
+public interface ClothRepository extends JpaRepository<Cloth, Long> {
 
     List<Cloth> findAllByBrand(Brand brand);
 

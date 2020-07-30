@@ -17,6 +17,7 @@ public class OccasionService {
     }
 
     public void addOccasion(Occasion newOccasion) {
+        newOccasion.setOccasionName(newOccasion.getOccasionName().toUpperCase());
         occasionRepository.save(newOccasion);
     }
 }

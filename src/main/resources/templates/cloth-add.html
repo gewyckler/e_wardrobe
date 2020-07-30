@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>cloth_add</title>
+    <title>Add Cloth</title>
     <div th:replace="fragments :: headerlinks" th:remove="tag"></div>
 </head>
 <body>
@@ -11,9 +11,7 @@
 <main role="main" class="main">
     <div class="container">
         <div class="row col-md-12 ">
-            <!--<div class="col-md-12">-->
-            <!--<h1 class="view-tag">Add Cloth</h1>-->
-            <!--</div>-->
+            <div class="col-md-12 overlap-banner">Add Cloth</div>
             <div class="col-md-12">
                 <form th:action="@{/cloth/add}" method="post" th:object="${cloth}" enctype="multipart/form-data"
                       class="col-md-12 form-container">
@@ -25,13 +23,22 @@
                             <label for="clothType">Cloth Type:</label>
                         </div>
                         <div class="col-md-5">
-                            <select class="form-control" th:name="clothType" id="clothType" th:field="*{clothType}"
-                                    th:value="*{clothType}">
-
+                            <select class="form-control" th:name="clothTypeId" id="clothType">
                                 <option th:each="clType: ${clothTypes}"
-                                        th:text="${clType}"
-                                        th:value="${clType}"></option>
+                                        th:text="${clType.getName()}"
+                                        th:value="${clType.getId()}"></option>
                             </select>
+                        </div>
+                        <!--ADD CLOTH TYPE-->
+                        <div class="col-md-2">
+                            <!--<a th:href="@{/brand/add}"-->
+                            <!--onclick="centeredPopup(this.href,'myWindow','700','300','yes');-->
+                            <!--return false">-->
+                            <!--<button type="button" class="btn-warning center_newbtn">New</button>-->
+                            <!--</a>-->
+                            <a th:href="@{/clothType/add}">
+                                <button type="button" class="btn-warning center_newbtn">New</button>
+                            </a>
                         </div>
                     </div>
 

@@ -1,10 +1,8 @@
 package pl.javagda25.ewardrobe.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.javagda25.ewardrobe.model.Brand;
 import pl.javagda25.ewardrobe.model.Cloth;
 import pl.javagda25.ewardrobe.model.ClothType;
 import pl.javagda25.ewardrobe.model.Outfit;
@@ -21,16 +19,7 @@ public class OutfitController {
     private OccasionService occasionService;
     private SeasonService seasonService;
     private BrandService brandService;
-
-    @Autowired
-    public OutfitController(OutfitService outfitService, ClothService clothService, OccasionService occasionService,
-                            SeasonService seasonService, BrandService brandService) {
-        this.outfitService = outfitService;
-        this.clothService = clothService;
-        this.occasionService = occasionService;
-        this.seasonService = seasonService;
-        this.brandService = brandService;
-    }
+    private ClothTypeService clothTypeService;
 
     @GetMapping("/addCloth")
     public String addClothToOutfit(Model model,
@@ -78,12 +67,12 @@ public class OutfitController {
     @GetMapping("/listCloth")
     public String list(Model model,
                        @RequestParam(name = "outfitId") Long outfitId,
-                       @RequestParam(name = "brandsFilter", required = false) String brandName,
-                       @RequestParam(name = "typeFilter", required = false) ClothType clothType,
+                       @RequestParam(name = "brandsFilter", required = false) Long brandId,
+                       @RequestParam(name = "typeFilter", required = false) Long clothTypeId,
                        @RequestParam(name = "occasionFilter", required = false) Long occasionId,
                        @RequestParam(name = "seasonFilter", required = false) Long seasonId) {
 
-        List<Cloth> clothList = clothService.getAll(brandName, clothType, occasionId, seasonId);
+        List<Cloth> clothList = clothService.getAll(brandId, clothTypeId, occasionId, seasonId);
 
         Outfit outfit = outfitService.findById(outfitId);
         model.addAttribute("outfit", outfit);
@@ -124,7 +113,7 @@ public class OutfitController {
 
     private void sendListOfTypesOccasionSeason(Model model) {
         model.addAttribute("brands", brandService.getAll());
-        model.addAttribute("clothTypes", ClothType.values());
+        model.addAttribute("clothTypes", clothTypeService.getAll());
         model.addAttribute("occasionList", occasionService.getAll());
         model.addAttribute("seasonList", seasonService.getAll());
     }

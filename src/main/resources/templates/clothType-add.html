@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Brand</title>
+    <title>Add Cloth Type</title>
     <div th:replace="fragments :: headerlinks" th:remove="tag"></div>
 </head>
 <body>
@@ -11,19 +11,20 @@
 <main role="main" class="main">
     <div class="container">
         <div class="row col-md-12 ">
-            <div class="col-md-12 overlap-banner ">Add Brand</div>
+            <div class="col-md-12 overlap-banner">Add Cloth Type</div>
             <div class="col-md-12">
-                <form th:action="@{/brand/add}" method="post" th:object="${brand}" class="col-md-12 form-container">
-                    <input type="hidden" th:field="*{brandId}" th:value="*{brandId}">
+                <form th:action="@{/clothType-add.html/add}" method="post" th:object="${clothType}"
+                      class="col-md-12 form-container">
+                    <input type="hidden" th:field="*{id}" th:value="*{id}">
 
-                    <!--BRAND NAME-->
+                    <!--CLOTH TYPE NAME-->
                     <div class="row col-md-12 form-row-container">
                         <div class="text-in-form col-md-6">
-                            <label for="brandName">Name:</label>
+                            <label for="clothTypeName">Name:</label>
                         </div>
                         <div class="col-md-5">
-                            <input type="text" class="form-control" th:name="brandName"
-                                   id="brandName" th:field="*{name}"
+                            <input type="text" class="form-control" th:name="clothTypeName"
+                                   id="clothTypeName" th:field="*{name}"
                                    th:value="*{name}">
                         </div>
                     </div>
